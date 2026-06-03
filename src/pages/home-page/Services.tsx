@@ -1,70 +1,110 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import {
-    Wrench,
-    Settings,
-    Star,
-    Shield,
-    Zap,
-    BarChart,
-    Users,
-    Globe,
-    Layers,
-    MessageSquare,
-    Briefcase,
-    Clock,
-} from 'lucide-react';
-import type { ReactNode } from 'react';
+import { useEffect, useRef } from 'react';
+import anime from 'animejs';
 import { BUSINESS_DATA } from '../../data';
-import { SectionHeader } from '../../components/SectionHeader';
 import { useScrollReveal } from '../../scrollReveal';
 import s from './Services.module.scss';
 
-const ICON_MAP: Record<string, ReactNode> = {
-    wrench: <Wrench size={24} />,
-    settings: <Settings size={24} />,
-    star: <Star size={24} />,
-    shield: <Shield size={24} />,
-    zap: <Zap size={24} />,
-    barChart: <BarChart size={24} />,
-    users: <Users size={24} />,
-    globe: <Globe size={24} />,
-    layers: <Layers size={24} />,
-    messageSquare: <MessageSquare size={24} />,
-    briefcase: <Briefcase size={24} />,
-    clock: <Clock size={24} />,
-};
-
 export default function Services() {
-    const { ref, is_visible } = useScrollReveal();
-    const reduced_motion = useReducedMotion();
+    const { ref: headerRef, is_visible: headerVisible } = useScrollReveal(0.15);
+    const { ref: listRef, is_visible: listVisible } = useScrollReveal(0.05);
+    const animated = useRef(false);
+
+    useEffect(() => {
+        if (!listVisible || animated.current) return;
+        animated.current = true;
+
+        const prefersReduced = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches;
+        if (prefersReduced) return;
+        if (!listRef.current) return;
+
+        const rows = listRef.current.querySelectorAll('[data-row]');
+        anime({
+            targets: rows,
+            opacity: [0, 1],
+            translateX: [-24, 0],
+            delay: anime.stagger(60),
+            duration: 500,
+            easing: 'easeOutExpo',
+        });
+    }, [listVisible, listRef]);
 
     return (
         <section id="services" className={s.services}>
-            <div className={s.inner}>
-                <SectionHeader
-                    label="What We Do"
-                    title="Our Services"
-                    subtitle="A full range of professional services delivered with care and expertise."
-                />
+            <div className={s.container}>
+                {/* Header */}
+                <div
+                    ref={headerRef as React.RefObject<HTMLDivElement>}
+                    className={`${s.header} ${headerVisible ? s.headerVisible : ''}`}
+                >
+                    <div className={s.headerLeft}>
+                        <p className={s.sectionLabel}>
+                            <span className={s.labelDot} aria-hidden="true" />
+                            What We Do
+                        </p>
+                        <h2 className={s.heading}>SERVICES</h2>
+                    </div>
+                    <p className={s.headerSub}>
+                        Rural and civil earthmoving across the New England
+                        region. Operated by qualified locals who know the land
+                        and the conditions.
+                    </p>
+                </div>
 
-                <div ref={ref} className={s.grid}>
-                    {BUSINESS_DATA.services.map((svc, i) => (
-                        <motion.article
-                            key={svc.title}
-                            className={s.card}
-                            initial={
-                                reduced_motion ? false : { opacity: 0, y: 20 }
-                            }
-                            animate={is_visible ? { opacity: 1, y: 0 } : {}}
-                            transition={{ duration: 0.45, delay: i * 0.07 }}
-                        >
-                            <div className={s.iconWrap}>
-                                {ICON_MAP[svc.iconName] ?? <Wrench size={24} />}
+                {/* Service list */}
+                <div
+                    ref={listRef as React.RefObject<HTMLDivElement>}
+                    className={s.list}
+                >
+                    {BUSINESS_DATA.services.map((svc, i) => {
+                        const isEmergency = svc.iconName === 'zap';
+                        return (
+                            <div
+                                key={svc.title}
+                                className={`${s.row} ${isEmergency ? s.rowEmergency : ''}`}
+                                data-row="true"
+                                style={{ opacity: 0 }}
+                            >
+                                <span className={s.rowNum} aria-hidden="true">
+                                    {String(i + 1).padStart(2, '0')}
+                                </span>
+                                <div className={s.rowBody}>
+                                    <h3 className={s.rowTitle}>{svc.title}</h3>
+                                    <p className={s.rowDesc}>{svc.description}</p>
+                                    {isEmergency && (
+                                        <a
+                                            href={`tel:${BUSINESS_DATA.phone.replace(/\s/g, '')}`}
+                                            className={s.callLink}
+                                        >
+                                            Call now: {BUSINESS_DATA.phone}
+                                        </a>
+                                    )}
+                                </div>
+                                {isEmergency && (
+                                    <a
+                                        href={`tel:${BUSINESS_DATA.phone.replace(/\s/g, '')}`}
+                                        className={s.callBtn}
+                                        aria-label={`Call 24/7: ${BUSINESS_DATA.phone}`}
+                                    >
+                                        CALL 24/7
+                                    </a>
+                                )}
                             </div>
-                            <h3 className={s.cardTitle}>{svc.title}</h3>
-                            <p className={s.cardDesc}>{svc.description}</p>
-                        </motion.article>
-                    ))}
+                        );
+                    })}
+                </div>
+
+                {/* Areas strip */}
+                <div className={s.areasStrip}>
+                    <span className={s.areasLabel}>OPERATING ACROSS</span>
+                    <div className={s.areasTags}>
+                        {BUSINESS_DATA.areas.map((area) => (
+                            <span key={area} className={s.areaTag}>
+                                {area}
+                            </span>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

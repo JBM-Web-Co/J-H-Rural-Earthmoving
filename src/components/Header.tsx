@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Menu, X, Phone } from 'lucide-react';
 import { BUSINESS_DATA } from '../data';
 import s from './Header.module.scss';
@@ -7,7 +6,7 @@ import s from './Header.module.scss';
 export function Header() {
     const [menu_open, set_menu_open] = useState(false);
     const [active_section, set_active_section] = useState('');
-    const reduced_motion = useReducedMotion();
+    const [scrolled, set_scrolled] = useState(false);
 
     useEffect(() => {
         const sections = document.querySelectorAll('section[id]');
@@ -25,19 +24,38 @@ export function Header() {
         return () => observer.disconnect();
     }, []);
 
-    const close_menu = () => set_menu_open(false);
+    useEffect(() => {
+        const handle_scroll = () => set_scrolled(window.scrollY > 40);
+        window.addEventListener('scroll', handle_scroll, { passive: true });
+        return () => window.removeEventListener('scroll', handle_scroll);
+    }, []);
 
+    useEffect(() => {
+        document.body.style.overflow = menu_open ? 'hidden' : '';
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [menu_open]);
+
+    const close_menu = () => set_menu_open(false);
     const phone_href = `tel:${BUSINESS_DATA.phone.replace(/\s/g, '')}`;
 
     return (
-        <header className={s.header}>
+        <header className={`${s.header} ${scrolled ? s.scrolled : ''}`}>
             <div className={s.inner}>
                 <a
                     href="#"
                     className={s.logo}
-                    aria-label={`${BUSINESS_DATA.name} — home`}
+                    aria-label={`${BUSINESS_DATA.name}`}
+                    onClick={close_menu}
                 >
-                    <span className={s.logoText}>{BUSINESS_DATA.name}</span>
+                    <img
+                        src="/logo-horizontal.png"
+                        alt={BUSINESS_DATA.name}
+                        className={s.logoImg}
+                        width={180}
+                        height={40}
+                    />
                 </a>
 
                 <nav className={s.nav} aria-label="Main navigation">
@@ -54,51 +72,52 @@ export function Header() {
                         );
                     })}
                     <a href={phone_href} className={s.cta}>
-                        <Phone size={16} />
+                        <Phone size={15} strokeWidth={2.5} />
                         Call Now
                     </a>
                 </nav>
 
                 <button
                     className={s.mobileMenuBtn}
-                    onClick={() => set_menu_open(!menu_open)}
+                    onClick={() => set_menu_open((v) => !v)}
                     aria-label={menu_open ? 'Close menu' : 'Open menu'}
                     aria-expanded={menu_open}
                 >
-                    {menu_open ? <X size={24} /> : <Menu size={24} />}
+                    {menu_open ? <X size={22} /> : <Menu size={22} />}
                 </button>
             </div>
 
-            <AnimatePresence>
-                {menu_open && (
-                    <motion.div
-                        className={s.mobileMenu}
-                        initial={reduced_motion ? false : { opacity: 0, y: -8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={reduced_motion ? {} : { opacity: 0, y: -8 }}
-                        transition={{ duration: 0.2 }}
+            <div
+                className={`${s.mobileMenu} ${menu_open ? s.mobileMenuOpen : ''}`}
+                aria-hidden={!menu_open}
+            >
+                {BUSINESS_DATA.navItems.map((item) => (
+                    <a
+                        key={item.href}
+                        href={item.href}
+                        className={s.mobileNavLink}
+                        onClick={close_menu}
                     >
-                        {BUSINESS_DATA.navItems.map((item) => (
-                            <a
-                                key={item.href}
-                                href={item.href}
-                                className={s.mobileNavLink}
-                                onClick={close_menu}
-                            >
-                                {item.label}
-                            </a>
-                        ))}
-                        <a
-                            href={phone_href}
-                            className={s.mobileNavCta}
-                            onClick={close_menu}
-                        >
-                            <Phone size={18} />
-                            Call {BUSINESS_DATA.phone}
-                        </a>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                        {item.label}
+                    </a>
+                ))}
+                <a
+                    href={phone_href}
+                    className={s.mobileNavCta}
+                    onClick={close_menu}
+                >
+                    <Phone size={18} />
+                    Call {BUSINESS_DATA.phone}
+                </a>
+            </div>
+
+            {menu_open && (
+                <div
+                    className={s.overlay}
+                    onClick={close_menu}
+                    aria-hidden="true"
+                />
+            )}
         </header>
     );
 }

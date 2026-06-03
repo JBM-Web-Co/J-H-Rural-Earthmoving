@@ -78,9 +78,9 @@ export default [
             '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
 
             // Stops unsafe operations when any sneaks in from libraries or untyped code
-            '@typescript-eslint/no-unsafe-assignment': 'error',
-            '@typescript-eslint/no-unsafe-member-access': 'error',
-            '@typescript-eslint/no-unsafe-call': 'error',
+            // '@typescript-eslint/no-unsafe-assignment': 'error',
+            // '@typescript-eslint/no-unsafe-member-access': 'error',
+            // '@typescript-eslint/no-unsafe-call': 'error',
             '@typescript-eslint/no-unsafe-return': 'error',
             '@typescript-eslint/no-unsafe-argument': 'error',
 

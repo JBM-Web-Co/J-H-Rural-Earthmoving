@@ -3,7 +3,6 @@ import { Phone, Mail, Clock, CheckCircle2 } from 'lucide-react';
 import { BUSINESS_DATA } from '../../data';
 import { Button } from '../../components/Button';
 import { FormField } from '../../components/FormField';
-import { SectionHeader } from '../../components/SectionHeader';
 import s from './Contact.module.scss';
 import { track } from '@vercel/analytics';
 
@@ -54,7 +53,7 @@ export default function Contact() {
             set_errors((prev) => ({ ...prev, [field]: undefined }));
     };
 
-    const handle_submit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    const handle_submit = async (e: React.FormEvent<HTMLFormElement>) => {
         track('Form Submitted', { source: 'homepage' });
         e.preventDefault();
         const errs = validateForm(form);
@@ -84,26 +83,35 @@ export default function Contact() {
         }
     };
 
+    const phone_href = `tel:${BUSINESS_DATA.phone.replace(/\s/g, '')}`;
+
     return (
         <section id="contact" className={s.contact}>
-            <div className={s.inner}>
-                <SectionHeader
-                    label="Get in Touch"
-                    title="Contact us"
-                    subtitle="Ready to get started? Give us a call or send us a message below."
-                />
+            <div className={s.topLine} aria-hidden="true" />
 
+            <div className={s.inner}>
+                {/* Section header */}
+                <div>
+                    <p className={s.sectionLabel}>
+                        <span className={s.labelDot} aria-hidden="true" />
+                        Get in Touch
+                    </p>
+                    <h2 className={s.heading}>Contact Us</h2>
+                    <p className={s.sub}>
+                        Ready to get the job started? Give us a call or send a
+                        message below. We'll get back to you fast.
+                    </p>
+                </div>
+
+                {/* Emergency phone CTA */}
                 <div className={s.phoneBlock}>
-                    <a
-                        href={`tel:${BUSINESS_DATA.phone.replace(/\s/g, '')}`}
-                        className={s.phoneLink}
-                    >
+                    <a href={phone_href} className={s.phoneLink}>
                         <span className={s.phoneIconWrap}>
                             <Phone size={22} />
                         </span>
                         <div className={s.phoneText}>
                             <span className={s.phoneLabel}>
-                                Call us directly
+                                24/7. Call us directly
                             </span>
                             <span className={s.phoneNumber}>
                                 {BUSINESS_DATA.phone}
@@ -113,6 +121,7 @@ export default function Contact() {
                 </div>
 
                 <div className={s.grid}>
+                    {/* Info panel */}
                     <div className={s.info}>
                         <h3 className={s.infoTitle}>{BUSINESS_DATA.name}</h3>
                         <p className={s.infoText}>
@@ -126,7 +135,7 @@ export default function Contact() {
                             <div>
                                 <div className={s.itemLabel}>Phone</div>
                                 <a
-                                    href={`tel:${BUSINESS_DATA.phone.replace(/\s/g, '')}`}
+                                    href={phone_href}
                                     className={s.itemValue}
                                 >
                                     {BUSINESS_DATA.phone}
@@ -154,14 +163,18 @@ export default function Contact() {
                                 <Clock size={18} />
                             </div>
                             <div>
-                                <div className={s.itemLabel}>Hours</div>
+                                <div className={s.itemLabel}>
+                                    Availability
+                                </div>
                                 <span className={s.itemValueStatic}>
-                                    {BUSINESS_DATA.hours}
+                                    {BUSINESS_DATA.hours}, Emergency response
+                                    available
                                 </span>
                             </div>
                         </div>
                     </div>
 
+                    {/* Form */}
                     <div className={s.formWrap}>
                         {submitted ? (
                             <div className={s.successPanel}>
@@ -218,7 +231,7 @@ export default function Contact() {
                                     type="textarea"
                                     value={form.message}
                                     onChange={update('message')}
-                                    placeholder="Tell us about your project — location, scope, timeline..."
+                                    placeholder="Tell us about your project: location, scope, timeline..."
                                 />
                                 {submit_error && (
                                     <p className={s.submitError}>

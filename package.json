@@ -4,6 +4,7 @@
     "version": "1.0.0",
     "type": "module",
     "scripts": {
+        "dev": "react-router dev",
         "vercel-dev": "vercel dev",
         "build": "react-router build",
         "lint": "eslint .",
@@ -20,6 +21,7 @@
     "dependencies": {
         "@react-router/node": "^7.13.1",
         "@vercel/analytics": "^2.0.1",
+        "animejs": "^3.2.2",
         "framer-motion": "^12.34.0",
         "isbot": "^5",
         "lucide-react": "^0.577.0",
@@ -32,6 +34,7 @@
     "devDependencies": {
         "@react-email/preview-server": "^5.2.9",
         "@react-router/dev": "^7.13.1",
+        "@types/animejs": "^3.1.13",
         "@types/node": "^25.4.0",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",

@@ -1,23 +1,29 @@
 @use 'breakpoints' as bp;
 
-// Static tokens (don't change with theme)
-$primary: #3775be;
-$primary-hover: #2d64a8;
-$primary-fg: #ffffff;
-$accent: #eab308;
-$accent-hover: #ca8a04;
-$accent-fg: #1a1a1a;
-$radius: 8px;
-$radius-lg: 12px;
-$radius-xl: 16px;
+// ── Static Tokens ─────────────────────────────────────────────────────────────
+$primary: #02f302; // Neon green — logo colour, hi-vis accent
+$primary-hover: #00d400;
+$primary-fg: #0a0a0a; // Dark text on neon green
+$accent: #f59e0b; // Amber — secondary warm accent
+$accent-hover: #d97706;
+$accent-fg: #0a0a0a;
+$danger: #ef4444;
+$success: #22c55e;
+
+$radius: 2px; // Industrial sharp corners
+$radius-lg: 4px;
+$radius-xl: 6px;
+$radius-full: 9999px;
+
 $font-heading: 'Oswald', sans-serif;
 $font-body: 'Source Sans 3', sans-serif;
 $container: 1200px;
 $header-height: 72px;
 
-// Theme-switching tokens (powered by CSS custom properties in global.scss)
+// ── Theme Tokens (via CSS custom properties) ─────────────────────────────────
 $bg: var(--bg);
 $surface: var(--surface);
+$surface-raised: var(--surface-raised);
 $text: var(--text);
 $text-muted: var(--text-muted);
 $text-light: var(--text-light);
@@ -29,6 +35,7 @@ $shadow-sm: var(--shadow-sm);
 $shadow: var(--shadow);
 $shadow-lg: var(--shadow-lg);
 
+// ── Layout Helpers ─────────────────────────────────────────────────────────────
 @mixin container {
     max-width: $container;
     margin: 0 auto;

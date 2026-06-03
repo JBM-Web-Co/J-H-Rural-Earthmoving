@@ -5,15 +5,18 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.75rem;
+    padding: 0.85rem 1.75rem;
     border-radius: $radius;
-    font-weight: 600;
-    font-size: 1rem;
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
     transition:
         background 0.2s,
         transform 0.15s,
         box-shadow 0.2s;
-    min-height: 44px;
+    min-height: 48px;
+    width: 100%;
 
     &:hover {
         transform: translateY(-1px);
@@ -31,26 +34,35 @@
 
         &:hover {
             background: $primary-hover;
-            box-shadow: 0 4px 16px rgba($primary, 0.3);
+            box-shadow: 0 0 24px rgba(2, 243, 2, 0.3);
+        }
+
+        &:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            transform: none;
         }
     }
 
     &.secondary {
         background: transparent;
         color: $primary;
-        border: 2px solid $primary;
+        border: 1.5px solid $primary;
 
         &:hover {
-            background: $primary-light;
+            background: rgba(2, 243, 2, 0.06);
+            box-shadow: 0 0 16px rgba(2, 243, 2, 0.15);
         }
     }
 
     &.white {
         background: $bg;
-        color: $primary;
+        color: $text;
+        border: 1px solid $border;
 
         &:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border-color: $primary;
+            color: $primary;
         }
     }
 }

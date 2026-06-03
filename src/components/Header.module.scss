@@ -7,104 +7,110 @@
     left: 0;
     right: 0;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.96);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid $border;
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+    background: transparent;
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease;
+    border-bottom: 1px solid transparent;
     height: $header-height;
 
-    .inner {
-        @include container;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 100%;
+    &.scrolled {
+        background: $nav-bg;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom-color: $border;
     }
+}
+
+.inner {
+    @include container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    cursor: pointer;
     flex-shrink: 0;
+    cursor: pointer;
 }
 
-.logoText {
-    font-family: $font-heading;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: $text;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+.logoImg {
+    height: 80px;
+    width: auto;
+    display: block;
 }
 
 .nav {
     display: none;
     align-items: center;
-    gap: 1.75rem;
+    gap: 2rem;
 
     @include bp.above(tablet) {
         display: flex;
     }
+}
 
-    .link {
-        font-family: $font-body;
-        font-size: 0.95rem;
-        font-weight: 500;
-        color: $text-muted;
-        transition: color 0.2s;
-        cursor: pointer;
-        position: relative;
+.link {
+    font-family: $font-body;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $text-muted;
+    transition: color 0.2s;
+    cursor: pointer;
+    position: relative;
 
-        &::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: $primary;
-            border-radius: 1px;
-            transform: scaleX(0);
-            transition: transform 0.2s ease;
-        }
-
-        &:hover,
-        &:focus-visible {
-            color: $primary;
-        }
-    }
-
-    .linkActive {
-        color: $primary;
-        font-weight: 600;
-
-        &::after {
-            transform: scaleX(1);
-        }
-    }
-
-    .cta {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 1px;
         background: $primary;
-        color: $primary-fg;
-        padding: 0.6rem 1.4rem;
-        border-radius: $radius;
-        font-family: $font-body;
-        font-weight: 700;
-        font-size: 0.95rem;
-        cursor: pointer;
-        transition:
-            background 0.2s,
-            box-shadow 0.2s;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+    }
 
-        &:hover {
-            background: $primary-hover;
-            box-shadow: 0 2px 10px rgba(55, 117, 190, 0.25);
-        }
+    &:hover {
+        color: $text;
+    }
+}
+
+.linkActive {
+    color: $primary;
+
+    &::after {
+        transform: scaleX(1);
+    }
+}
+
+.cta {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: $primary;
+    color: $primary-fg;
+    padding: 0.55rem 1.25rem;
+    border-radius: $radius;
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+        background 0.2s,
+        box-shadow 0.2s;
+
+    &:hover {
+        background: $primary-hover;
+        box-shadow: 0 0 20px rgba(2, 243, 2, 0.3);
     }
 }
 
@@ -117,6 +123,11 @@
     min-width: 44px;
     min-height: 44px;
     cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover {
+        color: $primary;
+    }
 
     @include bp.above(tablet) {
         display: none;
@@ -128,33 +139,42 @@
     top: $header-height;
     left: 0;
     right: 0;
-    background: #ffffff;
+    background: #111111;
     border-bottom: 1px solid $border;
-    padding: 1.25rem 1.5rem 1.5rem;
+    padding: 1.25rem 1.5rem 2rem;
     display: flex;
     flex-direction: column;
     gap: 0;
     z-index: 99;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition:
+        opacity 0.22s ease,
+        transform 0.22s ease;
 
     @include bp.above(tablet) {
         display: none;
     }
 }
 
+.mobileMenuOpen {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
 .mobileNavLink {
     font-family: $font-body;
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: $text;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid $border-light;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $text-muted;
+    padding: 1rem 0;
+    border-bottom: 1px solid $border;
     cursor: pointer;
     transition: color 0.2s;
-
-    &:last-of-type {
-        border-bottom: none;
-    }
 
     &:hover {
         color: $primary;
@@ -168,21 +188,34 @@
     gap: 0.5rem;
     background: $primary;
     color: $primary-fg;
-    padding: 0.85rem;
+    padding: 1rem;
     border-radius: $radius;
     font-family: $font-body;
     font-weight: 700;
     font-size: 1rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     text-align: center;
-    margin-top: 1rem;
+    margin-top: 1.25rem;
     cursor: pointer;
-    min-height: 48px;
+    min-height: 52px;
     transition:
         background 0.2s,
         box-shadow 0.2s;
 
     &:hover {
         background: $primary-hover;
-        box-shadow: 0 2px 10px rgba(55, 117, 190, 0.25);
+        box-shadow: 0 0 20px rgba(2, 243, 2, 0.3);
+    }
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 98;
+
+    @include bp.above(tablet) {
+        display: none;
     }
 }

@@ -8,43 +8,56 @@
 }
 
 .sectionLabel {
-    display: inline-block;
-    font-size: 0.8rem;
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: $font-body;
+    font-size: 0.78rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     color: $primary;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.875rem;
+
+    &::before {
+        content: '';
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        background: $primary;
+        border-radius: $radius-full;
+        box-shadow: 0 0 8px rgba(2, 243, 2, 0.5);
+        flex-shrink: 0;
+    }
 }
 
 .sectionTitle {
     font-family: $font-heading;
-    font-size: 2.2rem;
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     color: $text;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.875rem;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
-
-    @include bp.above(tablet) {
-        font-size: 2.75rem;
-    }
+    letter-spacing: 0.01em;
+    line-height: 1.05;
 }
 
 .sectionSubtitle {
-    font-size: 1.05rem;
+    font-family: $font-body;
+    font-size: 0.95rem;
     color: $text-muted;
-    line-height: 1.7;
+    line-height: 1.75;
 }
 
+// Dark variants (unused in new design — kept for compatibility)
 .sectionLabelDark {
-    color: $accent;
+    color: $primary;
 }
 
 .sectionTitleDark {
-    color: #f0ede8;
+    color: $text;
 }
 
 .sectionSubtitleDark {
-    color: rgba(240, 237, 232, 0.6);
+    color: $text-muted;
 }
