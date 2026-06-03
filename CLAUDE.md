@@ -1,0 +1,106 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+> **Skills:** Four skills extend this file with reusable standards — always load the relevant skill before working in that area:
+>
+> - `/code-style` — TypeScript rules, naming conventions, exports, component architecture, a11y
+> - `/scss` — SCSS tokens, CSS Modules, mobile-first, dark mode, nesting rules
+> - `/seo` — Heading hierarchy, JSON-LD schema, meta tags, MetaFunction convention
+> - `/brand-guidelines` — Clients business context, tone of voice, template colours
+
+---
+
+## Commands
+
+```bash
+npm run dev          # Start local dev server (uses Vercel CLI — required for API routes)
+npm run build        # Typecheck → build emails → React Router build
+npm run typecheck    # Run tsc on both src/ and api/ tsconfigs
+npm run lint         # ESLint
+npm run style        # Prettier (auto-formats in-place)
+npm run buildEmails  # Compile email TSX → JS via esbuild (runs as part of build)
+```
+
+CI runs Prettier, typecheck, and ESLint on every PR. Before pushing: run `npm run typecheck && npm run lint && npm run style`.
+
+---
+
+## Architecture
+
+This is a **React Router v7 + Vercel** landing page template for JBM Web Co clients. It is configured as a framework-mode React Router app deployed on Vercel with serverless API functions.
+
+### Customising for a new client
+
+All client-specific content lives in `src/data.ts`. Fill in the `businessData` object — name, contact details, services, areas, hero stats, nav items, etc. The rest of the app reads from this one file. Also replace public images (logo, hero).
+
+### Frontend
+
+- `root.tsx` — layout shell with header, footer, analytics, and font imports
+- `routes.ts` — route definitions
+- `pages/` — page-level components, each exports a `MetaFunction`
+- `components/` — reusable UI primitives
+- Each component has a co-located `*.module.scss` for styles
+
+### Styling
+
+All styles use SCSS Modules. Design tokens (colours, fonts, radius, spacing) live in `src/styles/_variables.scss`. Breakpoint mixins live in `src/styles/_breakpoints.scss`. Mobile-first: base styles for mobile, then `bp.above(...)` for larger screens. See `/scss` skill for full conventions.
+
+### API
+
+Vercel serverless functions. Each `.ts` file at the root of `api/` becomes an endpoint. Shared backend source lives under `api/_src/` (the `_src` prefix prevents Vercel treating them as routes). Email templates are `.tsx` files in `api/_src/emails/` and must be compiled to `.js` via `npm run buildEmails` before deployment.
+
+### SEO
+
+Pages export a `MetaFunction` with Open Graph, Twitter Card, and JSON-LD structured data. Static `sitemap.xml` and `robots.txt` are in `public/` and must be updated per client. See `/seo` skill for full conventions.
+
+---
+
+## Backend Conventions
+
+- Validate all input with Zod `safeParse`
+- Throw `HttpError` with a `statusCode` for known error cases
+- Never expose stack traces to the client
+- Use `Promise.all` for parallel side effects
+- Graceful degradation for non-critical failures (e.g. email)
+
+---
+
+## How Claude Should Respond
+
+General guidelines:
+
+- Ask clarifying questions first whenever anything is unclear
+- Ruthlessly truth-seek: challenge my framing and assumptions; don't mirror or placate
+- For any plan or comparison, give pros and cons
+- Check key facts with web search, not just prior knowledge
+- Be comprehensive and data-rich with concrete numbers; end with a short bullet summary
+- Proactively suggest options I haven't mentioned and anticipate follow-up needs
+- Be opinionated; treat me as an expert and favour strong arguments over authority or consensus
+- Include new tech and contrarian ideas as well as standard ones; clearly flag speculation and prediction
+- For complex topics, surface and challenge hidden assumptions, interpret my intent not literal wording, reframe into the most practical version, and treat rejected ideas as hard constraints you never re-suggest while preferring deeper, non-obvious options
+- I have a mechanical mind and am a visual learner
+- Prioritize long-term code maintainability and clarity over short-term speed or convenience
+
+When generating code:
+
+- Follow naming conventions strictly
+- Follow file structure rules
+- Match existing architecture
+- No generic boilerplate
+- No tutorial explanations
+- Assume strong technical knowledge
+- Call out architectural problems directly
+- Suggest improvements when needed
+
+When generating business copy:
+
+- Speak to Australian local service businesses
+- Be conversion-focused
+- Avoid fluff
+- Be clear and commercial
+
+When unsure:
+
+- Ask for clarification
+- Do not guess
