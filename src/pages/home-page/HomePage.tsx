@@ -4,7 +4,6 @@ import AboutUs from './AboutUs';
 import Services from './Services';
 import Equipment from './Equipment';
 import Community from './Community';
-import Ticker from '../../components/Ticker';
 import Contact from './Contact';
 import { BUSINESS_DATA } from '../../data';
 
@@ -91,7 +90,6 @@ export default function HomePage() {
     return (
         <>
             <Hero />
-            <Ticker />
             <AboutUs />
             <Services />
             <Equipment />

@@ -1,39 +1,59 @@
 @use '../../styles/variables' as *;
 @use '../../styles/breakpoints' as bp;
 
-// ─── Scroll Container ─────────────────────────────────────────────────────────
+// ─── Hero Container ───────────────────────────────────────────────────────────
 
-.scrollSection {
-    height: 230vh;
+.hero {
     position: relative;
-
-    @include bp.below(tablet) {
-        height: 100vh;
-    }
-}
-
-.sticky {
-    position: sticky;
-    top: 0;
     height: 100vh;
+    min-height: 600px;
     overflow: hidden;
-    background: var(--bg);
-    transition: opacity 0.08s linear;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
-// ─── Background ───────────────────────────────────────────────────────────────
+// ─── Background Image ─────────────────────────────────────────────────────────
 
 .bg {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(
-        circle,
-        rgba(2, 243, 2, 0.032) 1px,
-        transparent 1px
-    );
-    background-size: 26px 26px;
-    pointer-events: none;
+    background-image: url('/hero-background.png');
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+    z-index: 0;
+    animation: hero-scale 14s ease-out forwards;
+
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+    }
 }
+
+@keyframes hero-scale {
+    from {
+        transform: scale(1.06);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+// ─── Overlay ─────────────────────────────────────────────────────────────────
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(5, 5, 5, 0.92) 0%,
+        rgba(5, 5, 5, 0.52) 45%,
+        rgba(5, 5, 5, 0.18) 100%
+    );
+    z-index: 1;
+}
+
+// ─── Accent Line ─────────────────────────────────────────────────────────────
 
 .accentLine {
     position: absolute;
@@ -44,26 +64,43 @@
     background: linear-gradient(
         90deg,
         $primary 0%,
-        rgba(2, 243, 2, 0.25) 45%,
-        transparent 70%
+        rgba(2, 243, 2, 0.2) 50%,
+        transparent 80%
     );
     z-index: 4;
 }
 
-// ─── Title Block ──────────────────────────────────────────────────────────────
+// ─── Content Block ────────────────────────────────────────────────────────────
 
-.titleWrap {
-    position: absolute;
-    left: 5%;
-    top: 50%;
-    transform: translateY(-52%);
+.content {
+    position: relative;
     z-index: 2;
-    padding-bottom: 6rem;
+    padding: 0 1.5rem 8rem;
+    max-width: 860px;
+    animation: hero-rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.15s;
 
     @include bp.above(tablet) {
-        left: 6%;
+        padding: 0 4rem 8.5rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
     }
 }
+
+@keyframes hero-rise {
+    from {
+        opacity: 0;
+        transform: translateY(32px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// ─── Location Stamp ───────────────────────────────────────────────────────────
 
 .locationStamp {
     display: inline-flex;
@@ -72,11 +109,10 @@
     font-family: $font-heading;
     font-size: 0.65rem;
     font-weight: 600;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: $primary;
-    margin-bottom: 1.4rem;
-    opacity: 0.8;
+    margin-bottom: 1.2rem;
 }
 
 .locationDot {
@@ -85,118 +121,151 @@
     height: 5px;
     background: $primary;
     border-radius: 50%;
-    box-shadow: 0 0 8px rgba(2, 243, 2, 0.7);
+    box-shadow: 0 0 10px rgba(2, 243, 2, 0.8);
     flex-shrink: 0;
 }
 
-.titleGroup {
-    display: block;
-    user-select: none;
-}
+// ─── Title ────────────────────────────────────────────────────────────────────
 
 .title {
+    display: flex;
+    flex-direction: column;
     font-family: $font-heading;
     font-weight: 700;
     text-transform: uppercase;
     line-height: 0.88;
-    color: $text;
     letter-spacing: -0.02em;
-    display: flex;
-    flex-direction: column;
-
-    // Character spans — keep inline-block set via JS style
+    color: #ffffff;
+    margin-bottom: 1.6rem;
 }
 
 .titleLine1 {
-    display: block;
-    font-size: clamp(54px, 13.5vw, 186px);
-    color: $text;
-    white-space: nowrap;
+    font-size: clamp(60px, 14vw, 186px);
+    color: #ffffff;
 }
 
 .titleLine2 {
-    display: block;
-    font-size: clamp(46px, 11.5vw, 156px);
-    color: $text;
-    opacity: 0.9;
-    white-space: nowrap;
+    font-size: clamp(48px, 11.5vw, 152px);
+    color: rgba(255, 255, 255, 0.88);
 }
 
 .titleLine3 {
-    display: block;
-    font-size: clamp(28px, 6.8vw, 90px);
-    color: $text;
-    opacity: 0.65;
+    font-size: clamp(28px, 6.6vw, 86px);
+    color: rgba(255, 255, 255, 0.58);
     letter-spacing: 0.01em;
-    white-space: nowrap;
 }
+
+// ─── Tagline ──────────────────────────────────────────────────────────────────
+
+.tagline {
+    font-family: $font-body;
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.68);
+    max-width: 500px;
+    margin-bottom: 2rem;
+}
+
+// ─── CTA Buttons ─────────────────────────────────────────────────────────────
+
+.ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.ctaPrimary {
+    display: inline-flex;
+    align-items: center;
+    background: $primary;
+    color: $primary-fg;
+    font-family: $font-heading;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.75rem;
+    border-radius: $radius;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+        background 0.18s ease,
+        transform 0.14s ease;
+
+    &:hover {
+        background: $primary-hover;
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.ctaSecondary {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    color: #ffffff;
+    font-family: $font-heading;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    border-radius: $radius;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease,
+        transform 0.14s ease;
+
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.07);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+// ─── Established ─────────────────────────────────────────────────────────────
 
 .established {
     font-family: $font-body;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: $text-muted;
-    margin-top: 1.6rem;
-    opacity: 0.65;
-}
-
-// ─── Dozer ────────────────────────────────────────────────────────────────────
-
-.dozerWrap {
-    position: absolute;
-    right: 6%;
-    bottom: 140px;
-    width: 62%;
-    min-width: 420px;
-    z-index: 1;
-    will-change: transform;
-
-    @include bp.above(desktop) {
-        width: 58%;
-    }
-
-    @include bp.below(tablet) {
-        width: 90%;
-        bottom: 72px;
-        opacity: 0.25;
-        min-width: 0;
-        pointer-events: none;
-    }
-}
-
-.dozerSvg {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.55));
-}
-
-.ground {
-    height: 2px;
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(2, 243, 2, 0.18) 15%,
-        rgba(2, 243, 2, 0.08) 100%
-    );
-    width: 118%;
-    margin-left: -9%;
-    margin-top: -3px;
+    color: rgba(255, 255, 255, 0.3);
 }
 
 // ─── Stats Strip ─────────────────────────────────────────────────────────────
 
-.statsStrip {
+.tickerWrap {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 4;
+}
+
+.statsStrip {
+    position: absolute;
+    bottom: 2.1rem;
+    left: 0;
+    right: 0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    border-top: 1px solid rgba(2, 243, 2, 0.09);
-    background: rgba(2, 243, 2, 0.022);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(5, 5, 5, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     z-index: 3;
 
     @include bp.above(tablet) {
@@ -208,7 +277,7 @@
     display: flex;
     flex-direction: column;
     padding: 1rem 1.25rem;
-    border-right: 1px solid rgba(2, 243, 2, 0.06);
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
 
     &:last-child {
         border-right: none;
@@ -232,7 +301,7 @@
 .statLabel {
     font-family: $font-body;
     font-size: 0.65rem;
-    color: $text-muted;
+    color: rgba(255, 255, 255, 0.48);
     text-transform: uppercase;
     letter-spacing: 0.07em;
     line-height: 1.3;
@@ -263,17 +332,21 @@
     font-family: $font-heading;
     font-size: 0.55rem;
     letter-spacing: 0.22em;
-    color: $text-muted;
+    color: rgba(255, 255, 255, 0.4);
     text-transform: uppercase;
     writing-mode: vertical-rl;
-    opacity: 0.7;
 }
 
 .scrollBar {
     width: 1px;
     height: 2.2rem;
     background: linear-gradient(to bottom, $primary, transparent);
-    animation: scroll-pulse 1.9s ease-in-out infinite;
+    animation: scroll-pulse 2s ease-in-out infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        opacity: 0.5;
+    }
 }
 
 @keyframes scroll-pulse {
@@ -282,6 +355,6 @@
         opacity: 1;
     }
     50% {
-        opacity: 0.18;
+        opacity: 0.15;
     }
 }

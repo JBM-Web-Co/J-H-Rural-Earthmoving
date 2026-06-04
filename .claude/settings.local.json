@@ -1,16 +1,17 @@
 {
-    "permissions": {
-        "allow": [
-            "Bash(*)",
-            "Read(*)",
-            "Edit(*)",
-            "Write(*)",
-            "mcp__stitch__*",
-            "mcp__claude_ai_Airtable__*",
-            "mcp__claude_ai_Canva__*",
-            "mcp__claude_ai_Figma__*",
-            "WebSearch",
-            "WebFetch(*)"
-        ]
-    }
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "Read(*)",
+      "Edit(*)",
+      "Write(*)",
+      "mcp__stitch__*",
+      "mcp__claude_ai_Airtable__*",
+      "mcp__claude_ai_Canva__*",
+      "mcp__claude_ai_Figma__*",
+      "WebSearch",
+      "WebFetch(*)",
+      "mcp__plugin_claude-mem_mcp-search__smart_outline"
+    ]
+  }
 }

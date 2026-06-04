@@ -35,7 +35,7 @@ export default function Services() {
             <div className={s.container}>
                 {/* Header */}
                 <div
-                    ref={headerRef as React.RefObject<HTMLDivElement>}
+                    ref={headerRef}
                     className={`${s.header} ${headerVisible ? s.headerVisible : ''}`}
                 >
                     <div className={s.headerLeft}>
@@ -71,7 +71,9 @@ export default function Services() {
                                 </span>
                                 <div className={s.rowBody}>
                                     <h3 className={s.rowTitle}>{svc.title}</h3>
-                                    <p className={s.rowDesc}>{svc.description}</p>
+                                    <p className={s.rowDesc}>
+                                        {svc.description}
+                                    </p>
                                     {isEmergency && (
                                         <a
                                             href={`tel:${BUSINESS_DATA.phone.replace(/\s/g, '')}`}

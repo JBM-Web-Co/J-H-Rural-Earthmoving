@@ -9,8 +9,7 @@ export default function AboutUs() {
     const { ref: imageRef, is_visible: image_visible } = useScrollReveal(0.2);
     const { ref: contentRef, is_visible: content_visible } =
         useScrollReveal(0.15);
-    const { ref: pointsRef, is_visible: points_visible } =
-        useScrollReveal(0.1);
+    const { ref: pointsRef, is_visible: points_visible } = useScrollReveal(0.1);
     const animated_content = useRef(false);
     const animated_points = useRef(false);
 
@@ -59,7 +58,7 @@ export default function AboutUs() {
             <div className={s.inner}>
                 {/* ── Image Column ── */}
                 <div
-                    ref={imageRef as React.RefObject<HTMLDivElement>}
+                    ref={imageRef}
                     className={`${s.imageCol} ${image_visible ? s.imageVisible : ''}`}
                 >
                     <div className={s.imagePlaceholder}>
@@ -97,19 +96,17 @@ export default function AboutUs() {
                         </h2>
                         <p className={s.body}>
                             J &amp; H Rural Earthmoving was built from the
-                            ground up. With years of experience
-                            working on our own family farm, we developed a deep
-                            understanding of what rural and agricultural
-                            landowners actually need from an earthmoving
-                            contractor.
+                            ground up. With years of experience working on our
+                            own family farm, we developed a deep understanding
+                            of what rural and agricultural landowners actually
+                            need from an earthmoving contractor.
                         </p>
                         <p className={s.body}>
                             That first-hand knowledge sets us apart. We don't
-                            just move dirt. We understand drainage, soil
-                            types, water flow, and farm productivity. We know
-                            that getting the job done right the first time
-                            keeps your operation moving forward without costly
-                            rework.
+                            just move dirt. We understand drainage, soil types,
+                            water flow, and farm productivity. We know that
+                            getting the job done right the first time keeps your
+                            operation moving forward without costly rework.
                         </p>
                     </div>
 

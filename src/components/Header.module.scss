@@ -139,7 +139,7 @@
     top: $header-height;
     left: 0;
     right: 0;
-    background: #111111;
+    background: var(--surface);
     border-bottom: 1px solid $border;
     padding: 1.25rem 1.5rem 2rem;
     display: flex;
