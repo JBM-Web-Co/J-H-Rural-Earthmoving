@@ -1,53 +1,64 @@
-import { useEffect, useRef } from 'react';
-import anime from 'animejs';
-import { Camera } from 'lucide-react';
+import { useRef, useEffect } from 'react';
 import { useScrollReveal } from '../../scrollReveal';
 import s from './Community.module.scss';
 
 const GALLERY_ITEMS = [
-    { label: 'Dam Construction', size: 'large' },
-    { label: 'Land Clearing', size: 'small' },
-    { label: 'Road Build', size: 'small' },
-    { label: 'Excavation Work', size: 'medium' },
-    { label: 'Dozer Work', size: 'medium' },
-    { label: 'Site Clearing', size: 'small' },
+    { label: 'Dam Construction' },
+    { label: 'Land Clearing' },
+    { label: 'Road Build' },
+    { label: 'Excavation Work' },
+    { label: 'Dozer Work' },
+    { label: 'Site Clearing' },
 ] as const;
 
 const SPONSOR_COUNT = 3;
 
 export default function Projects() {
     const { ref: headerRef, is_visible: headerVisible } = useScrollReveal(0.2);
-    const { ref: galleryRef, is_visible: galleryVisible } =
-        useScrollReveal(0.05);
-    const galleryAnimated = useRef(false);
+    const carouselRef = useRef<HTMLDivElement>(null);
 
+    // Mouse drag-to-scroll for desktop users without a trackpad
     useEffect(() => {
-        if (!galleryVisible || galleryAnimated.current) return;
-        galleryAnimated.current = true;
+        const el = carouselRef.current;
+        if (!el) return;
 
-        const prefersReduced = window.matchMedia(
-            '(prefers-reduced-motion: reduce)'
-        ).matches;
-        if (prefersReduced) return;
-        if (!galleryRef.current) return;
+        let startX = 0;
+        let startScroll = 0;
+        let dragging = false;
 
-        const tiles = galleryRef.current.querySelectorAll('[data-tile]');
-        anime({
-            targets: tiles,
-            opacity: [0, 1],
-            scale: [0.96, 1],
-            delay: anime.stagger(55),
-            duration: 480,
-            easing: 'easeOutExpo',
-        });
-    }, [galleryVisible, galleryRef]);
+        const onDown = (e: MouseEvent) => {
+            dragging = true;
+            startX = e.clientX;
+            startScroll = el.scrollLeft;
+            el.style.cursor = 'grabbing';
+        };
+
+        const onMove = (e: MouseEvent) => {
+            if (!dragging) return;
+            el.scrollLeft = startScroll - (e.clientX - startX);
+        };
+
+        const onUp = () => {
+            dragging = false;
+            el.style.cursor = '';
+        };
+
+        el.addEventListener('mousedown', onDown);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onUp);
+
+        return () => {
+            el.removeEventListener('mousedown', onDown);
+            window.removeEventListener('mousemove', onMove);
+            window.removeEventListener('mouseup', onUp);
+        };
+    }, []);
 
     return (
         <section id="projects" className={s.projects}>
             <div className={s.container}>
-                {/* Header */}
                 <div
-                    ref={headerRef as React.RefObject<HTMLDivElement>}
+                    ref={headerRef}
                     className={`${s.header} ${headerVisible ? s.headerVisible : ''}`}
                 >
                     <p className={s.sectionLabel}>
@@ -60,33 +71,32 @@ export default function Projects() {
                         recent jobs across the New England region.
                     </p>
                 </div>
+            </div>
 
-                {/* Gallery */}
-                <div
-                    ref={galleryRef as React.RefObject<HTMLDivElement>}
-                    className={s.gallery}
-                >
+            {/* Cover flow — full section width, mirrors BlossomCarousel host element */}
+            <div
+                ref={carouselRef}
+                className={s.carousel}
+                role="region"
+                aria-label="Recent projects gallery"
+            >
+                <ul className={s.track}>
                     {GALLERY_ITEMS.map((item, i) => (
-                        <div
-                            key={i}
-                            className={`${s.tile} ${s[`tile__${item.size}`]}`}
-                            data-tile="true"
-                            style={{ opacity: 0 }}
-                        >
-                            <div className={s.tileDots} aria-hidden="true" />
-                            <div className={s.tileContent}>
-                                <Camera
-                                    size={16}
-                                    className={s.tileIcon}
-                                    aria-hidden="true"
-                                />
-                                <span className={s.tileLabel}>{item.label}</span>
+                        <li key={i} className={s.item}>
+                            <div className={s.slide}>
+                                <div className={s.card}>
+                                    <div className={s.cardBg} aria-hidden="true" />
+                                    <div className={s.cardCaption}>
+                                        <span className={s.cardLabel}>{item.label}</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </li>
                     ))}
-                </div>
+                </ul>
+            </div>
 
-                {/* Proudly Sponsoring */}
+            <div className={s.container}>
                 <div className={s.sponsoring}>
                     <div className={s.sponsoringHeader}>
                         <span className={s.labelDot} aria-hidden="true" />
@@ -94,7 +104,11 @@ export default function Projects() {
                     </div>
                     <div className={s.sponsorGrid}>
                         {Array.from({ length: SPONSOR_COUNT }).map((_, i) => (
-                            <div key={i} className={s.sponsorCard} aria-label="Sponsor logo placeholder">
+                            <div
+                                key={i}
+                                className={s.sponsorCard}
+                                aria-label="Sponsor logo placeholder"
+                            >
                                 <div className={s.sponsorInner} aria-hidden="true" />
                             </div>
                         ))}
