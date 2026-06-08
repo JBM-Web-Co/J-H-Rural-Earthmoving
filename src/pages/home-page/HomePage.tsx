@@ -1,7 +1,6 @@
 import type { MetaFunction } from 'react-router';
 import Hero from './Hero';
 import AboutUs from './AboutUs';
-import Services from './Services';
 import Equipment from './Equipment';
 import Community from './Community';
 import Contact from './Contact';
@@ -91,7 +90,6 @@ export default function HomePage() {
         <>
             <Hero />
             <AboutUs />
-            <Services />
             <Equipment />
             <Community />
             <Contact />
