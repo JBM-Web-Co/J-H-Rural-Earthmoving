@@ -50,7 +50,7 @@ export function Header() {
                     onClick={close_menu}
                 >
                     <img
-                        src="/logo-horizontal.png"
+                        src="/images/logo-horizontal.png"
                         alt={BUSINESS_DATA.name}
                         className={s.logoImg}
                         width={180}

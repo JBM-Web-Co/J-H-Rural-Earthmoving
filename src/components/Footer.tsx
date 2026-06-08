@@ -34,7 +34,7 @@ export function Footer() {
                             className={s.logoLink}
                         >
                             <img
-                                src="/logo.png"
+                                src="/images/logo.png"
                                 alt={BUSINESS_DATA.name}
                                 className={s.logo}
                                 width={120}

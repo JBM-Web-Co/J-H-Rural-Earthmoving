@@ -15,7 +15,7 @@ const JSON_LD = {
     url: BUSINESS_DATA.url,
     telephone: BUSINESS_DATA.phone,
     email: BUSINESS_DATA.email,
-    image: `${BUSINESS_DATA.url}/logo.png`,
+    image: `${BUSINESS_DATA.url}/images/logo.png`,
     priceRange: '$$',
     address: {
         '@type': 'PostalAddress',
@@ -71,7 +71,7 @@ export const meta: MetaFunction = () => [
     { property: 'og:url', content: BUSINESS_DATA.url },
     { property: 'og:site_name', content: BUSINESS_DATA.name },
     { tagName: 'link', rel: 'canonical', href: BUSINESS_DATA.url },
-    { property: 'og:image', content: `${BUSINESS_DATA.url}/logo.png` },
+    { property: 'og:image', content: `${BUSINESS_DATA.url}/images/logo.png` },
     { property: 'og:image:width', content: '1200' },
     { property: 'og:image:height', content: '630' },
     { property: 'og:image:alt', content: BUSINESS_DATA.name },
@@ -81,7 +81,7 @@ export const meta: MetaFunction = () => [
         content: `${BUSINESS_DATA.name} | ${BUSINESS_DATA.tagline}`,
     },
     { name: 'twitter:description', content: BUSINESS_DATA.description },
-    { name: 'twitter:image', content: `${BUSINESS_DATA.url}/logo.png` },
+    { name: 'twitter:image', content: `${BUSINESS_DATA.url}/images/logo.png` },
     { name: 'twitter:image:alt', content: BUSINESS_DATA.name },
     { 'script:ld+json': JSON_LD },
 ];
