@@ -10,7 +10,8 @@
             "mcp__claude_ai_Canva__*",
             "mcp__claude_ai_Figma__*",
             "WebSearch",
-            "WebFetch(*)"
+            "WebFetch(*)",
+            "mcp__plugin_claude-mem_mcp-search__smart_outline"
         ]
     }
 }

@@ -1,46 +1,48 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import { Phone, ArrowRight } from 'lucide-react';
-import { BUSINESS_DATA } from '../../data';
 import s from './Hero.module.scss';
+import { BUSINESS_DATA } from '../../data';
+import Ticker from '../../components/Ticker';
 
 export default function Hero() {
-    const reduced_motion = useReducedMotion();
-    const get_anim = (delay: number) =>
-        reduced_motion
-            ? {}
-            : {
-                  initial: { opacity: 0, y: 24 },
-                  animate: { opacity: 1, y: 0 },
-                  transition: { duration: 0.55, delay },
-              };
-
-    const phone_href = `tel:${BUSINESS_DATA.phone.replace(/\s/g, '')}`;
-
     return (
-        <section className={s.hero}>
-            <div className={s.inner}>
-                <motion.p className={s.eyebrow} {...get_anim(0)}>
-                    {BUSINESS_DATA.city}
-                </motion.p>
+        <section className={s.hero} aria-label="Hero">
+            <div className={s.bg} aria-hidden="true" />
+            <div className={s.overlay} aria-hidden="true" />
+            <div className={s.accentLine} aria-hidden="true" />
 
-                <motion.h1 className={s.headline} {...get_anim(0.1)}>
-                    {BUSINESS_DATA.tagline}
-                </motion.h1>
+            <div className={s.content}>
+                <p className={s.locationStamp}>
+                    <span className={s.locationDot} aria-hidden="true" />
+                    Ben Lomond, NSW
+                </p>
 
-                <motion.p className={s.sub} {...get_anim(0.2)}>
-                    {BUSINESS_DATA.description}
-                </motion.p>
+                <h1 className={s.title}>
+                    <span className={s.titleLine1}>J &amp; H</span>
+                    <span className={s.titleLine2}>Rural</span>
+                    <span className={s.titleLine3}>Earthmoving</span>
+                </h1>
 
-                <motion.div className={s.ctas} {...get_anim(0.3)}>
-                    <a href={phone_href} className={s.ctaPrimary}>
-                        <Phone size={18} />
+                <p className={s.tagline}>{BUSINESS_DATA.description}</p>
+
+                <div className={s.ctas}>
+                    <a
+                        href={`tel:${BUSINESS_DATA.phone}`}
+                        className={s.ctaPrimary}
+                    >
                         Call {BUSINESS_DATA.phone}
                     </a>
                     <a href="#contact" className={s.ctaSecondary}>
-                        Get a Free Quote
-                        <ArrowRight size={18} />
+                        Get a Quote
                     </a>
-                </motion.div>
+                </div>
+            </div>
+
+            <div className={s.scrollCue} aria-hidden="true">
+                <span className={s.scrollText}>Scroll</span>
+                <div className={s.scrollBar} />
+            </div>
+
+            <div className={s.tickerWrap}>
+                <Ticker />
             </div>
         </section>
     );

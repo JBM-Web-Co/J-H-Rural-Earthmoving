@@ -4,54 +4,123 @@
 .footer {
     background: var(--footer-bg);
     color: var(--footer-text);
-    padding: 4rem 0 1.75rem;
+}
 
-    .inner {
-        @include container;
+// ── Emergency Strip ────────────────────────────────────────────────────────────
+
+.emergencyStrip {
+    background: rgba(2, 243, 2, 0.06);
+    border-top: 1px solid rgba(2, 243, 2, 0.15);
+    border-bottom: 1px solid rgba(2, 243, 2, 0.1);
+    padding: 0.875rem 0;
+}
+
+.stripInner {
+    @include container;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+
+    @include bp.above(tablet) {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
+}
+
+.stripLeft {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: $font-body;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--footer-text);
+}
+
+.zapIcon {
+    color: $primary;
+    flex-shrink: 0;
+    animation: zap-pulse 2s ease-in-out infinite;
+}
+
+@keyframes zap-pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.stripCta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: $primary;
+    color: $primary-fg;
+    padding: 0.5rem 1.1rem;
+    border-radius: $radius;
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition:
+        background 0.2s,
+        box-shadow 0.2s;
+
+    &:hover {
+        background: $primary-hover;
+        box-shadow: 0 0 16px rgba(2, 243, 2, 0.3);
+    }
+}
+
+// ── Main Footer ────────────────────────────────────────────────────────────────
+
+.inner {
+    @include container;
+    padding-top: 3.5rem;
+    padding-bottom: 2rem;
 }
 
 .grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 2.5rem;
     margin-bottom: 2.5rem;
 
-    & > *:first-child {
-        width: 100%;
-    }
-
     @include bp.above(tablet) {
-        & > *:first-child {
-            flex: 2 1 0;
-            min-width: 0;
-        }
-
-        & > *:not(:first-child) {
-            flex: 1 1 0;
-            min-width: 0;
-        }
+        grid-template-columns: 2fr 1fr 1fr 1fr;
     }
 }
 
+// Brand column
 .brand {
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
+    gap: 1rem;
 }
 
-.logoText {
-    font-family: $font-heading;
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+.logoLink {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    display: block;
+    opacity: 0.9;
 }
 
 .tagline {
     font-family: $font-heading;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: $primary;
     letter-spacing: 0.06em;
@@ -60,35 +129,28 @@
 
 .desc {
     font-family: $font-body;
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     color: var(--footer-muted);
     line-height: 1.7;
-    max-width: 340px;
+    max-width: 320px;
 }
 
-.social {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+.abn {
     font-family: $font-body;
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: $accent;
-    transition: color 0.2s;
-    cursor: pointer;
-
-    &:hover {
-        color: $accent-hover;
-    }
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--footer-muted);
+    opacity: 0.6;
 }
 
+// Columns
 .colTitle {
     font-family: $font-heading;
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 0.78rem;
+    font-weight: 700;
     color: var(--footer-heading);
     margin-bottom: 1rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
 }
 
@@ -100,7 +162,7 @@
 
 .link {
     font-family: $font-body;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: var(--footer-muted);
     transition: color 0.2s;
     cursor: pointer;
@@ -113,19 +175,20 @@
 .contactItems {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.7rem;
 }
 
 .contactItem {
     display: flex;
-    align-items: center;
-    gap: 0.6rem;
+    align-items: flex-start;
+    gap: 0.55rem;
     font-family: $font-body;
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     color: var(--footer-muted);
     cursor: pointer;
     transition: color 0.2s;
     word-break: break-word;
+    line-height: 1.4;
 
     &:hover {
         color: $primary;
@@ -135,8 +198,31 @@
 .contactIcon {
     flex-shrink: 0;
     color: $primary;
-    opacity: 0.75;
+    opacity: 0.6;
+    margin-top: 1px;
 }
+
+.areaList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.areaItem {
+    font-family: $font-body;
+    font-size: 0.85rem;
+    color: var(--footer-muted);
+    line-height: 1.4;
+
+    &::before {
+        content: '→ ';
+        color: $primary;
+        opacity: 0.5;
+        font-size: 0.75rem;
+    }
+}
+
+// ── Bottom Bar ─────────────────────────────────────────────────────────────────
 
 .bottom {
     border-top: 1px solid var(--footer-border);
@@ -147,20 +233,20 @@
     align-items: center;
     gap: 0.5rem;
     font-family: $font-body;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--footer-muted);
 }
 
 .attribution {
     font-size: 0.75rem;
-    color: var(--footer-muted);
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
 .attributionLink {
     color: inherit;
     text-decoration: underline;
     text-underline-offset: 2px;
+    transition: opacity 0.2s;
 
     &:hover {
         opacity: 1;

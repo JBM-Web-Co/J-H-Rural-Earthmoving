@@ -1,38 +1,230 @@
 @use '../../styles/variables' as *;
 @use '../../styles/breakpoints' as bp;
 
-.aboutUs {
-    background: $surface;
+.about {
+    background: $bg;
+    @include section-padding;
+    overflow: hidden;
 }
 
 .inner {
     @include container;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
 
     @include bp.above(tablet) {
-        padding-top: 7rem;
-        padding-bottom: 7rem;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 5rem;
     }
 }
 
-.content {
-    max-width: 720px;
-    margin: 0 auto;
+// ── Image Column ──────────────────────────────────────────────────────────────
+
+.imageCol {
+    position: relative;
+    flex-shrink: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+
+    @include bp.above(tablet) {
+        width: 42%;
+        max-width: 460px;
+    }
 }
+
+.imageVisible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.imagePlaceholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: $surface;
+    border: 1px solid $border;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagePhoto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.placeholderGrid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+        circle,
+        rgba(2, 243, 2, 0.1) 1px,
+        transparent 1px
+    );
+    background-size: 24px 24px;
+}
+
+.placeholderLabel {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    text-align: center;
+
+    span {
+        font-family: $font-heading;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.15);
+    }
+
+    small {
+        font-family: $font-body;
+        font-size: 0.68rem;
+        color: rgba(0, 0, 0, 0.1);
+        letter-spacing: 0.04em;
+    }
+}
+
+.imageAccentTL,
+.imageAccentBR {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+}
+
+.imageAccentTL {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid $primary;
+    border-left: 2px solid $primary;
+}
+
+.imageAccentBR {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid $primary;
+    border-right: 2px solid $primary;
+}
+
+.yearsCard {
+    position: absolute;
+    bottom: 1.5rem;
+    right: -1rem;
+    background: $primary;
+    color: $primary-fg;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    border-radius: $radius;
+    box-shadow: 0 8px 24px rgba(2, 243, 2, 0.25);
+
+    @include bp.above(tablet) {
+        right: -1.5rem;
+    }
+}
+
+.yearsNum {
+    font-family: $font-heading;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    color: $primary-fg;
+}
+
+.yearsLabel {
+    font-family: $font-body;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
+    color: $primary-fg;
+}
+
+// ── Text Column ───────────────────────────────────────────────────────────────
+
+.textCol {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.sectionLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: $font-body;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $primary;
+}
+
+.labelDot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: $primary;
+    border-radius: $radius-full;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(2, 243, 2, 0.5);
+}
+
+.heading {
+    font-family: $font-heading;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $text;
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+}
+
+.headingAccent {
+    color: $primary;
+}
+
+.body {
+    font-family: $font-body;
+    font-size: 1rem;
+    color: $text-muted;
+    line-height: 1.8;
+    max-width: 560px;
+}
+
+// ── Why-Us Points ─────────────────────────────────────────────────────────────
 
 .points {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-
-    @include bp.above(tablet) {
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem 2rem;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
 }
 
 .point {
@@ -40,14 +232,13 @@
     align-items: flex-start;
     gap: 0.75rem;
     font-family: $font-body;
-    font-size: 1rem;
-    font-weight: 500;
-    color: $text;
+    font-size: 0.95rem;
+    color: $text-muted;
     line-height: 1.5;
 }
 
 .pointIcon {
     color: $primary;
     flex-shrink: 0;
-    margin-top: 2px;
+    margin-top: 0.15rem;
 }

@@ -2,17 +2,81 @@
 @use '../../styles/breakpoints' as bp;
 
 .contact {
-    @include section-padding;
     background: $surface;
-
-    .inner {
-        @include container;
-    }
+    @include section-padding;
+    position: relative;
 }
 
+.topLine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(2, 243, 2, 0.2) 30%,
+        rgba(2, 243, 2, 0.2) 70%,
+        transparent
+    );
+}
+
+.inner {
+    @include container;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+// ── Section Header ─────────────────────────────────────────────────────────────
+
+.sectionLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: $font-body;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $primary;
+    margin-bottom: 1rem;
+}
+
+.labelDot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: $primary;
+    border-radius: $radius-full;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(2, 243, 2, 0.5);
+}
+
+.heading {
+    font-family: $font-heading;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $text;
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+    margin-bottom: 0.75rem;
+}
+
+.sub {
+    font-family: $font-body;
+    font-size: 0.95rem;
+    color: $text-muted;
+    line-height: 1.75;
+    max-width: 440px;
+}
+
+// ── Emergency Phone Bar ───────────────────────────────────────────────────────
+
 .phoneBlock {
-    max-width: 680px;
-    margin: 0 auto 3rem;
+    max-width: 640px;
 }
 
 .phoneLink {
@@ -22,7 +86,7 @@
     background: $primary;
     color: $primary-fg;
     padding: 1.25rem 1.75rem;
-    border-radius: $radius-lg;
+    border-radius: $radius;
     transition:
         background 0.2s,
         transform 0.18s,
@@ -32,7 +96,7 @@
     &:hover {
         background: $primary-hover;
         transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(55, 117, 190, 0.35);
+        box-shadow: 0 0 32px rgba(2, 243, 2, 0.3);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -45,7 +109,7 @@
 .phoneIconWrap {
     width: 48px;
     height: 48px;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.2);
     border-radius: $radius;
     display: flex;
     align-items: center;
@@ -56,32 +120,36 @@
 .phoneText {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.1rem;
 }
 
 .phoneLabel {
     font-family: $font-body;
-    font-size: 0.82rem;
-    font-weight: 500;
-    opacity: 0.85;
-    letter-spacing: 0.02em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.7;
 }
 
 .phoneNumber {
     font-family: $font-heading;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: 0.03em;
+    line-height: 1;
 
     @include bp.above(tablet) {
-        font-size: 2rem;
+        font-size: 1.85rem;
     }
 }
+
+// ── Two Column Grid ────────────────────────────────────────────────────────────
 
 .grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 3rem;
+    gap: 2.5rem;
 
     & > * {
         width: 100%;
@@ -89,11 +157,13 @@
 
     @include bp.above(tablet) {
         & > * {
-            width: calc(50% - 1.5rem);
+            width: calc(50% - 1.25rem);
             flex: 0 0 auto;
         }
     }
 }
+
+// ── Info Panel ─────────────────────────────────────────────────────────────────
 
 .info {
     display: flex;
@@ -103,47 +173,47 @@
 
 .infoTitle {
     font-family: $font-heading;
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     font-weight: 700;
     color: $text;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
 }
 
 .infoText {
     font-family: $font-body;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: $text-muted;
     line-height: 1.75;
-    margin-top: -0.75rem;
 }
 
 .item {
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
+    gap: 0.875rem;
 }
 
 .itemIcon {
     width: 40px;
     height: 40px;
     border-radius: $radius;
-    background: $primary-light;
+    background: rgba(2, 243, 2, 0.08);
     color: $primary;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    border: 1px solid rgba(2, 243, 2, 0.15);
 }
 
 .itemLabel {
     font-family: $font-body;
-    font-size: 0.78rem;
-    color: $text-muted;
+    font-size: 0.72rem;
+    color: $text-light;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 600;
-    margin-bottom: 0.15rem;
+    letter-spacing: 0.07em;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
 }
 
 .itemValue {
@@ -166,10 +236,12 @@
     color: $text;
 }
 
+// ── Form Panel ─────────────────────────────────────────────────────────────────
+
 .formWrap {
     background: $bg;
     border: 1px solid $border;
-    border-radius: $radius-lg;
+    border-radius: $radius;
     padding: 2rem;
 
     @include bp.above(tablet) {
@@ -187,7 +259,7 @@
 }
 
 .successIcon {
-    color: #16a34a;
+    color: $primary;
 }
 
 .successTitle {
@@ -196,7 +268,7 @@
     font-weight: 700;
     color: $text;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
 }
 
 .successText {
@@ -210,6 +282,6 @@
 .submitError {
     font-family: $font-body;
     font-size: 0.88rem;
-    color: #dc2626;
+    color: $danger;
     margin-bottom: 0.75rem;
 }

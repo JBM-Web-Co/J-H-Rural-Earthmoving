@@ -1,0 +1,178 @@
+@use '../../styles/variables' as *;
+@use '../../styles/breakpoints' as bp;
+
+.projects {
+    background: var(--bg);
+    padding: 5rem 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.topStripe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        $primary 20%,
+        $primary 80%,
+        transparent
+    );
+    opacity: 0.25;
+}
+
+.container {
+    @include container;
+}
+
+// ─── Header ───────────────────────────────────────────────────────────────────
+
+.header {
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+.headerVisible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.sectionLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: $font-body;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: $primary;
+    margin-bottom: 0.75rem;
+}
+
+.labelDot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: $primary;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(2, 243, 2, 0.5);
+    flex-shrink: 0;
+}
+
+.heading {
+    font-family: $font-heading;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 700;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 0.95;
+    margin: 0 0 0.875rem;
+}
+
+.sub {
+    font-family: $font-body;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.72;
+    max-width: 480px;
+}
+
+// ─── Auto-scroll Marquee ───────────────────────────────────────────────────────
+
+.marqueeWrapper {
+    overflow: hidden;
+    padding-block: 2rem;
+    // Fade edges so the scroll feels continuous
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 8%,
+        black 92%,
+        transparent
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 8%,
+        black 92%,
+        transparent
+    );
+
+    &:hover .track {
+        animation-play-state: paused;
+    }
+}
+
+.track {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: max-content;
+    animation: marquee 38s linear infinite;
+}
+
+.item {
+    flex-shrink: 0;
+    width: 300px;
+    height: 210px;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    position: relative;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s ease;
+    }
+
+    &:hover img {
+        transform: scale(1.04);
+    }
+}
+
+.caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent);
+    border-radius: 0 0 $radius-lg $radius-lg;
+}
+
+.captionLabel {
+    font-family: $font-heading;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #fff;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .track {
+        animation: none;
+    }
+}

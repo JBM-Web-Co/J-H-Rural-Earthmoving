@@ -1,7 +1,8 @@
 import type { MetaFunction } from 'react-router';
 import Hero from './Hero';
-import Services from './Services';
 import AboutUs from './AboutUs';
+import Equipment from './Equipment';
+import Community from './Community';
 import Contact from './Contact';
 import { BUSINESS_DATA } from '../../data';
 
@@ -13,7 +14,7 @@ const JSON_LD = {
     url: BUSINESS_DATA.url,
     telephone: BUSINESS_DATA.phone,
     email: BUSINESS_DATA.email,
-    image: `${BUSINESS_DATA.url}/logo.png`,
+    image: `${BUSINESS_DATA.url}/images/logo.png`,
     priceRange: '$$',
     address: {
         '@type': 'PostalAddress',
@@ -56,7 +57,9 @@ const JSON_LD = {
 };
 
 export const meta: MetaFunction = () => [
-    { title: `${BUSINESS_DATA.name} | ${BUSINESS_DATA.tagline}` },
+    {
+        title: `${BUSINESS_DATA.name} | ${BUSINESS_DATA.tagline}`,
+    },
     { name: 'description', content: BUSINESS_DATA.description },
     {
         property: 'og:title',
@@ -67,24 +70,18 @@ export const meta: MetaFunction = () => [
     { property: 'og:url', content: BUSINESS_DATA.url },
     { property: 'og:site_name', content: BUSINESS_DATA.name },
     { tagName: 'link', rel: 'canonical', href: BUSINESS_DATA.url },
-    { property: 'og:image', content: `${BUSINESS_DATA.url}/hero.png` },
+    { property: 'og:image', content: `${BUSINESS_DATA.url}/images/logo.png` },
     { property: 'og:image:width', content: '1200' },
     { property: 'og:image:height', content: '630' },
-    {
-        property: 'og:image:alt',
-        content: BUSINESS_DATA.name,
-    },
+    { property: 'og:image:alt', content: BUSINESS_DATA.name },
     { name: 'twitter:card', content: 'summary_large_image' },
     {
         name: 'twitter:title',
         content: `${BUSINESS_DATA.name} | ${BUSINESS_DATA.tagline}`,
     },
     { name: 'twitter:description', content: BUSINESS_DATA.description },
-    { name: 'twitter:image', content: `${BUSINESS_DATA.url}/hero.png` },
-    {
-        name: 'twitter:image:alt',
-        content: BUSINESS_DATA.name,
-    },
+    { name: 'twitter:image', content: `${BUSINESS_DATA.url}/images/logo.png` },
+    { name: 'twitter:image:alt', content: BUSINESS_DATA.name },
     { 'script:ld+json': JSON_LD },
 ];
 
@@ -93,7 +90,8 @@ export default function HomePage() {
         <>
             <Hero />
             <AboutUs />
-            <Services />
+            <Equipment />
+            <Community />
             <Contact />
         </>
     );
