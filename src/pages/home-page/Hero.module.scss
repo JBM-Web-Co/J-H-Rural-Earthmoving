@@ -6,11 +6,16 @@
 .hero {
     position: relative;
     height: 100vh;
+    height: 100dvh;
     min-height: 600px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+
+    @include bp.below(tablet) {
+        justify-content: flex-start;
+    }
 }
 
 // ─── Background Image ─────────────────────────────────────────────────────────
@@ -75,7 +80,7 @@
 .content {
     position: relative;
     z-index: 2;
-    padding: 0 1.5rem 8rem;
+    padding: clamp(5rem, 16vh, 9rem) 1.5rem 6rem;
     max-width: 860px;
     animation: hero-rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
     animation-delay: 0.15s;
@@ -140,17 +145,17 @@
 }
 
 .titleLine1 {
-    font-size: clamp(60px, 14vw, 186px);
+    font-size: clamp(76px, 14vw, 186px);
     color: #ffffff;
 }
 
 .titleLine2 {
-    font-size: clamp(48px, 11.5vw, 152px);
+    font-size: clamp(62px, 11.5vw, 152px);
     color: rgba(255, 255, 255, 0.88);
 }
 
 .titleLine3 {
-    font-size: clamp(28px, 6.6vw, 86px);
+    font-size: clamp(36px, 6.6vw, 86px);
     color: rgba(255, 255, 255, 0.58);
     letter-spacing: 0.01em;
 }
