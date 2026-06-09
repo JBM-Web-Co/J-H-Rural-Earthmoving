@@ -56,6 +56,7 @@ export default function Projects() {
 
     return (
         <section id="projects" className={s.projects}>
+            <div className={s.topStripe} aria-hidden="true" />
             <div className={s.container}>
                 <div
                     ref={headerRef}

@@ -12,8 +12,8 @@ type MediaCarouselProps = {
 function MediaCarousel({ media, name }: MediaCarouselProps) {
     const [index, setIndex] = useState(0);
 
-    const prev = () => setIndex(i => (i - 1 + media.length) % media.length);
-    const next = () => setIndex(i => (i + 1) % media.length);
+    const prev = () => setIndex((i) => (i - 1 + media.length) % media.length);
+    const next = () => setIndex((i) => (i + 1) % media.length);
 
     const current = media[index];
     const isVideo = current.endsWith('.mp4');
@@ -101,8 +101,7 @@ function MediaCarousel({ media, name }: MediaCarouselProps) {
 }
 
 export default function Equipment() {
-    const { ref: headerRef, is_visible: header_visible } =
-        useScrollReveal(0.2);
+    const { ref: headerRef, is_visible: header_visible } = useScrollReveal(0.2);
     const { ref: gridRef, is_visible: grid_visible } = useScrollReveal(0.05);
     const animated = useRef(false);
 
@@ -134,7 +133,7 @@ export default function Equipment() {
             <div className={s.container}>
                 {/* Header */}
                 <div
-                    ref={headerRef as React.RefObject<HTMLDivElement>}
+                    ref={headerRef}
                     className={`${s.header} ${header_visible ? s.headerVisible : ''}`}
                 >
                     <p className={s.sectionLabel}>
@@ -150,10 +149,7 @@ export default function Equipment() {
                 </div>
 
                 {/* Equipment Grid */}
-                <div
-                    ref={gridRef as React.RefObject<HTMLDivElement>}
-                    className={s.grid}
-                >
+                <div ref={gridRef} className={s.grid}>
                     {BUSINESS_DATA.equipment.map((cat) => (
                         <article
                             key={cat.id}
@@ -193,17 +189,6 @@ export default function Equipment() {
                             </div>
                         </article>
                     ))}
-                </div>
-
-                {/* Bottom CTA */}
-                <div className={s.bottomCta}>
-                    <p className={s.ctaText}>
-                        Need something specific? Our fleet is constantly
-                        growing. Ask us about availability.
-                    </p>
-                    <a href="#contact" className={s.ctaBtn}>
-                        Enquire About Our Fleet
-                    </a>
                 </div>
             </div>
         </section>

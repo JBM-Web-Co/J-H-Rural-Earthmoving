@@ -4,6 +4,24 @@
 .projects {
     background: var(--bg);
     padding: 5rem 0 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.topStripe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        $primary 20%,
+        $primary 80%,
+        transparent
+    );
+    opacity: 0.25;
 }
 
 .container {
