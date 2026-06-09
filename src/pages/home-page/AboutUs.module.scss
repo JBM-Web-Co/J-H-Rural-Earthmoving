@@ -32,6 +32,10 @@
         opacity 0.7s ease,
         transform 0.7s ease;
 
+    @include bp.below(tablet) {
+        order: 2;
+    }
+
     @include bp.above(tablet) {
         width: 42%;
         max-width: 460px;

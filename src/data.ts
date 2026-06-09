@@ -202,7 +202,7 @@ export const BUSINESS_DATA: BusinessData = {
             id: 'trucks',
             name: 'Trucks',
             description:
-                'Versatile truck fleet covering haulage, hay carting, and on-site water management. Our quad float handles heavy equipment transport while the water cart keeps dust and fire risk under control.',
+                'Versatile truck fleet covering haulage, hay carting, and on-site water management.',
             specs: [
                 'Tippers',
                 'Quad float',
