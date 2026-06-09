@@ -12,7 +12,11 @@ export default function Sponsoring() {
                 </div>
                 <div className={s.grid}>
                     {Array.from({ length: SPONSOR_COUNT }).map((_, i) => (
-                        <div key={i} className={s.card} aria-label="Sponsor logo">
+                        <div
+                            key={i}
+                            className={s.card}
+                            aria-label="Sponsor logo"
+                        >
                             <div className={s.cardInner} aria-hidden="true" />
                         </div>
                     ))}

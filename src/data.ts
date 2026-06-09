@@ -239,11 +239,7 @@ export const BUSINESS_DATA: BusinessData = {
             name: 'Roadworks',
             description:
                 'We build solid, all-weather access roads, shed pads, and house pads engineered for the demands of rural properties and construction sites. Quality base preparation and compaction on every job.',
-            specs: [
-                'Roads',
-                'Shed pads',
-                'House pads',
-            ],
+            specs: ['Roads', 'Shed pads', 'House pads'],
             media: [
                 '/images/road-works/road1.jpg',
                 '/images/road-works/road1.mp4',

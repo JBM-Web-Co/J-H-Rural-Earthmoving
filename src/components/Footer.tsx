@@ -11,10 +11,14 @@ export function Footer() {
             <div className={s.emergencyStrip}>
                 <div className={s.stripInner}>
                     <div className={s.stripLeft}>
-                        <Zap size={16} className={s.zapIcon} aria-hidden="true" />
+                        <Zap
+                            size={16}
+                            className={s.zapIcon}
+                            aria-hidden="true"
+                        />
                         <span>
-                            24/7 Emergency Earthmoving.&nbsp;
-                            We mobilise fast when it counts
+                            24/7 Emergency Earthmoving.&nbsp; We mobilise fast
+                            when it counts
                         </span>
                     </div>
                     <a href={phone_href} className={s.stripCta}>
@@ -43,9 +47,7 @@ export function Footer() {
                         </a>
                         <p className={s.tagline}>{BUSINESS_DATA.tagline}</p>
                         <p className={s.desc}>{BUSINESS_DATA.description}</p>
-                        <p className={s.abn}>
-                            ABN {BUSINESS_DATA.abn}
-                        </p>
+                        <p className={s.abn}>ABN {BUSINESS_DATA.abn}</p>
                     </div>
 
                     {/* Quick Links */}
@@ -82,15 +84,12 @@ export function Footer() {
                             <div className={s.contactItem}>
                                 <Clock size={15} className={s.contactIcon} />
                                 <span>
-                                    {BUSINESS_DATA.hours}, Emergency
-                                    Response
+                                    {BUSINESS_DATA.hours}, Emergency Response
                                 </span>
                             </div>
                             <div className={s.contactItem}>
                                 <MapPin size={15} className={s.contactIcon} />
-                                <span>
-                                    Ben Lomond &amp; Delungra, NSW
-                                </span>
+                                <span>Ben Lomond &amp; Delungra, NSW</span>
                             </div>
                         </div>
                     </div>
@@ -110,8 +109,8 @@ export function Footer() {
 
                 <div className={s.bottom}>
                     <span>
-                        &copy; {new Date().getFullYear()}{' '}
-                        {BUSINESS_DATA.name}. All rights reserved.
+                        &copy; {new Date().getFullYear()} {BUSINESS_DATA.name}.
+                        All rights reserved.
                     </span>
                     <span className={s.attribution}>
                         Website by{' '}

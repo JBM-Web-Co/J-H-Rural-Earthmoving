@@ -41,7 +41,11 @@ export default function Projects() {
                 </div>
             </div>
 
-            <div className={s.marqueeWrapper} role="region" aria-label="Recent projects gallery">
+            <div
+                className={s.marqueeWrapper}
+                role="region"
+                aria-label="Recent projects gallery"
+            >
                 <ul className={s.track}>
                     {[...PROJECT_PHOTOS, ...PROJECT_PHOTOS].map((item, i) => {
                         const isDuplicate = i >= PROJECT_PHOTOS.length;
@@ -57,7 +61,9 @@ export default function Projects() {
                                     loading="lazy"
                                 />
                                 <div className={s.caption} aria-hidden="true">
-                                    <span className={s.captionLabel}>{item.label}</span>
+                                    <span className={s.captionLabel}>
+                                        {item.label}
+                                    </span>
                                 </div>
                             </li>
                         );
