@@ -1,0 +1,75 @@
+@use '../../styles/variables' as *;
+@use '../../styles/breakpoints' as bp;
+
+.sponsoring {
+    padding: 2.5rem 0 4rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+}
+
+.container {
+    @include container;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: $primary;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(2, 243, 2, 0.5);
+    flex-shrink: 0;
+}
+
+.title {
+    font-family: $font-heading;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin: 0;
+    opacity: 0.6;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-inline: auto;
+
+    @include bp.above(tablet) {
+        gap: 1.5rem;
+        max-width: 640px;
+    }
+}
+
+.card {
+    border: 1px dashed var(--border);
+    border-radius: $radius;
+    aspect-ratio: 3 / 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    transition: border-color 0.2s;
+
+    &:hover {
+        border-color: rgba(2, 243, 2, 0.25);
+    }
+}
+
+.cardInner {
+    width: 60%;
+    height: 2px;
+    background: var(--border);
+    border-radius: 1px;
+}

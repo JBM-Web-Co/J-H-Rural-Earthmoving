@@ -62,11 +62,11 @@ export default function AboutUs() {
                     className={`${s.imageCol} ${image_visible ? s.imageVisible : ''}`}
                 >
                     <div className={s.imagePlaceholder}>
-                        <div className={s.placeholderGrid} aria-hidden="true" />
-                        <div className={s.placeholderLabel}>
-                            <span>FAMILY PHOTO</span>
-                            <small>Team / job-site image</small>
-                        </div>
+                        <img
+                            src="/images/about-us.jpg"
+                            alt="J & H Rural Earthmoving team on site"
+                            className={s.imagePhoto}
+                        />
                     </div>
                     <div className={s.imageAccentTL} aria-hidden="true" />
                     <div className={s.imageAccentBR} aria-hidden="true" />
@@ -79,10 +79,7 @@ export default function AboutUs() {
 
                 {/* ── Text Column ── */}
                 <div className={s.textCol}>
-                    <div
-                        ref={contentRef as React.RefObject<HTMLDivElement>}
-                        className={s.intro}
-                    >
+                    <div ref={contentRef} className={s.intro}>
                         <p className={s.sectionLabel}>
                             <span className={s.labelDot} aria-hidden="true" />
                             About Us
@@ -110,10 +107,7 @@ export default function AboutUs() {
                         </p>
                     </div>
 
-                    <div
-                        ref={pointsRef as React.RefObject<HTMLDivElement>}
-                        className={s.points}
-                    >
+                    <div ref={pointsRef} className={s.points}>
                         {BUSINESS_DATA.whyUsPoints.map((point) => (
                             <div
                                 key={point}

@@ -264,6 +264,7 @@ export const BUSINESS_DATA: BusinessData = {
                 'Tank pads',
             ],
             media: [
+                '/images/water-systems/water1.jpg',
                 '/images/water-systems/water1.mp4',
             ],
         },

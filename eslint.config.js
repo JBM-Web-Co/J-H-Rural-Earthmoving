@@ -61,6 +61,12 @@ export default [
             // Type safety
             // Keep types consistent and prevent "any".
             '@typescript-eslint/no-explicit-any': 'error',
+            '@typescript-eslint/consistent-type-assertions': [
+                'error',
+                {
+                    assertionStyle: 'never',
+                },
+            ],
             '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
             // Forces `import type` for type-only imports and avoids side-effect imports with `type`.
             '@typescript-eslint/consistent-type-imports': [
@@ -78,9 +84,9 @@ export default [
             '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
 
             // Stops unsafe operations when any sneaks in from libraries or untyped code
-            // '@typescript-eslint/no-unsafe-assignment': 'error',
-            // '@typescript-eslint/no-unsafe-member-access': 'error',
-            // '@typescript-eslint/no-unsafe-call': 'error',
+            '@typescript-eslint/no-unsafe-assignment': 'error',
+            '@typescript-eslint/no-unsafe-member-access': 'error',
+            '@typescript-eslint/no-unsafe-call': 'error',
             '@typescript-eslint/no-unsafe-return': 'error',
             '@typescript-eslint/no-unsafe-argument': 'error',
 

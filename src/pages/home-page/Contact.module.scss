@@ -8,7 +8,10 @@
 }
 
 .topLine {
-    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 1px;
     background: linear-gradient(
         to right,
@@ -17,18 +20,13 @@
         rgba(2, 243, 2, 0.2) 70%,
         transparent
     );
-    margin-bottom: 5rem;
-
-    @include bp.above(tablet) {
-        margin-bottom: 7rem;
-    }
 }
 
 .inner {
     @include container;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 // ── Section Header ─────────────────────────────────────────────────────────────

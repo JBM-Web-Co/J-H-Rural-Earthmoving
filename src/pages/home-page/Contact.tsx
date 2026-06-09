@@ -99,7 +99,7 @@ export default function Contact() {
                     <h2 className={s.heading}>Contact Us</h2>
                     <p className={s.sub}>
                         Ready to get the job started? Give us a call or send a
-                        message below. We'll get back to you fast.
+                        message below.
                     </p>
                 </div>
 
@@ -134,10 +134,7 @@ export default function Contact() {
                             </div>
                             <div>
                                 <div className={s.itemLabel}>Phone</div>
-                                <a
-                                    href={phone_href}
-                                    className={s.itemValue}
-                                >
+                                <a href={phone_href} className={s.itemValue}>
                                     {BUSINESS_DATA.phone}
                                 </a>
                             </div>
@@ -163,9 +160,7 @@ export default function Contact() {
                                 <Clock size={18} />
                             </div>
                             <div>
-                                <div className={s.itemLabel}>
-                                    Availability
-                                </div>
+                                <div className={s.itemLabel}>Availability</div>
                                 <span className={s.itemValueStatic}>
                                     {BUSINESS_DATA.hours}, Emergency response
                                     available
