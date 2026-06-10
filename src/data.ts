@@ -22,6 +22,11 @@ type EquipmentCategory = Readonly<{
     media: readonly string[];
 }>;
 
+type Sponsor = Readonly<{
+    name: string;
+    logo?: string;
+}>;
+
 export type BusinessData = Readonly<{
     name: string;
     tagline: string;
@@ -46,6 +51,7 @@ export type BusinessData = Readonly<{
     services: readonly Service[];
     areas: readonly string[];
     equipment: readonly EquipmentCategory[];
+    sponsors: readonly Sponsor[];
 }>;
 
 export const BUSINESS_DATA: BusinessData = {
@@ -252,7 +258,7 @@ export const BUSINESS_DATA: BusinessData = {
             id: 'water-systems',
             name: 'Water Systems',
             description:
-                'Complete rural water infrastructure from poly pipe networks to concrete pads for tanks and troughs. We design and install reliable water delivery systems built to last in tough conditions.',
+                'Complete rural water infrastructure from poly pipe networks to gravel pads for tanks and troughs. We design and install reliable water delivery systems built to last in tough conditions.',
             specs: [
                 'Poly pipe laying',
                 'Pipe spinners',
@@ -264,5 +270,15 @@ export const BUSINESS_DATA: BusinessData = {
                 '/images/water-systems/water1.mp4',
             ],
         },
+    ],
+    sponsors: [
+        { name: 'Guyra Junior Rugby League', logo: '/images/sponsors/guyra_spuds_junior.png' },
+        { name: 'Guyra Senior Rugby League', logo: '/images/sponsors/guyra_spuds_senior.jpg' },
+        { name: "Dolly's Dream Awareness", logo: '/images/sponsors/dollys_dream.jpg' },
+        { name: 'Top of the Range', logo: '/images/sponsors/top_of_the_range.png' },
+        { name: 'Guyra Show Society', logo: '/images/sponsors/guyra_show_society.jpg' },
+        { name: 'Guyra Show Shearing' },
+        { name: 'Guyra Cattle Judging' },
+        { name: 'Guyra Rodeo' },
     ],
 } as const;
