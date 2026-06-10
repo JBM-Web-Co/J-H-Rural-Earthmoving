@@ -15,7 +15,11 @@ export default function Sponsoring() {
 
                 <div className={s.logoGrid}>
                     {logoSponsors.map((sp) => (
-                        <div key={sp.name} className={s.logoCard} aria-label={sp.name}>
+                        <div
+                            key={sp.name}
+                            className={s.logoCard}
+                            aria-label={sp.name}
+                        >
                             <img
                                 src={sp.logo}
                                 alt={sp.name}

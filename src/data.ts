@@ -272,11 +272,26 @@ export const BUSINESS_DATA: BusinessData = {
         },
     ],
     sponsors: [
-        { name: 'Guyra Junior Rugby League', logo: '/images/sponsors/guyra_spuds_junior.png' },
-        { name: 'Guyra Senior Rugby League', logo: '/images/sponsors/guyra_spuds_senior.jpg' },
-        { name: "Dolly's Dream Awareness", logo: '/images/sponsors/dollys_dream.jpg' },
-        { name: 'Top of the Range', logo: '/images/sponsors/top_of_the_range.png' },
-        { name: 'Guyra Show Society', logo: '/images/sponsors/guyra_show_society.jpg' },
+        {
+            name: 'Guyra Junior Rugby League',
+            logo: '/images/sponsors/guyra_spuds_junior.png',
+        },
+        {
+            name: 'Guyra Senior Rugby League',
+            logo: '/images/sponsors/guyra_spuds_senior.jpg',
+        },
+        {
+            name: "Dolly's Dream Awareness",
+            logo: '/images/sponsors/dollys_dream.jpg',
+        },
+        {
+            name: 'Top of the Range',
+            logo: '/images/sponsors/top_of_the_range.png',
+        },
+        {
+            name: 'Guyra Show Society',
+            logo: '/images/sponsors/guyra_show_society.jpg',
+        },
         { name: 'Guyra Show Shearing' },
         { name: 'Guyra Cattle Judging' },
         { name: 'Guyra Rodeo' },
