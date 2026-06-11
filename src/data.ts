@@ -71,7 +71,7 @@ export const BUSINESS_DATA: BusinessData = {
     postcode: '2365',
     country: 'AU',
 
-    url: 'https://www.jhruralearthmoving.com.au',
+    url: 'https://j-hruralearthmoving.com',
     facebook: undefined,
     googleProfile: undefined,
 

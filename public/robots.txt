@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.UPDATEME.com/sitemap.xml
+Sitemap: https://j-hruralearthmoving.com/sitemap.xml
