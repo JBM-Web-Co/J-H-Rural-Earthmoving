@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import anime from 'animejs';
+import { animate, stagger } from 'animejs';
 import { CheckCircle2 } from 'lucide-react';
 import { BUSINESS_DATA } from '../../data';
 import { useScrollReveal } from '../../scrollReveal';
@@ -22,12 +22,12 @@ export default function AboutUs() {
         ).matches;
         if (prefersReduced) return;
 
-        anime({
-            targets: contentRef.current,
+        if (!contentRef.current) return;
+        animate(contentRef.current, {
             opacity: [0, 1],
             translateY: [30, 0],
             duration: 600,
-            easing: 'easeOutExpo',
+            ease: 'outExpo',
         });
     }, [content_visible, contentRef]);
 
@@ -43,13 +43,12 @@ export default function AboutUs() {
         if (!pointsRef.current) return;
         const items = pointsRef.current.querySelectorAll('[data-point]');
 
-        anime({
-            targets: items,
+        animate(items, {
             opacity: [0, 1],
             translateX: [-20, 0],
-            delay: anime.stagger(70),
+            delay: stagger(70),
             duration: 500,
-            easing: 'easeOutExpo',
+            ease: 'outExpo',
         });
     }, [points_visible, pointsRef]);
 

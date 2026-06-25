@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import anime from 'animejs';
+import { animate, stagger } from 'animejs';
 import { BUSINESS_DATA } from '../../data';
 import { useScrollReveal } from '../../scrollReveal';
 import s from './Equipment.module.scss';
@@ -116,13 +116,12 @@ export default function Equipment() {
         if (!gridRef.current) return;
 
         const cards = gridRef.current.querySelectorAll('[data-eq-card]');
-        anime({
-            targets: cards,
+        animate(cards, {
             opacity: [0, 1],
             translateY: [40, 0],
-            delay: anime.stagger(100),
+            delay: stagger(100),
             duration: 600,
-            easing: 'easeOutExpo',
+            ease: 'outExpo',
         });
     }, [grid_visible, gridRef]);
 
