@@ -1,5 +1,5 @@
 {
-    "name": "landing-page-template",
+    "name": "J&H-rural-earthmoving",
     "private": true,
     "version": "1.0.0",
     "type": "module",
@@ -24,13 +24,13 @@
         "@react-router/node": "^8.0.1",
         "@vercel/analytics": "^2.0.1",
         "animejs": "^4.5.0",
-        "isbot": "^5",
         "lucide-react": "^1.21.0",
         "react": "^19.2.7",
         "react-dom": "^19.2.7",
         "react-router": "^8.0.1",
         "resend": "^6.14.0",
-        "zod": "^4.4.3"
+        "zod": "^4.4.3",
+        "isbot": "^5"
     },
     "devDependencies": {
         "@react-email/preview-server": "^5.2.11",

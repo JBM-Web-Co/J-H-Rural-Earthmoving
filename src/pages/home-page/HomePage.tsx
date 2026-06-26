@@ -6,9 +6,15 @@ import Community from './Community';
 import Contact from './Contact';
 import { BUSINESS_DATA } from '../../data';
 
+const REGION_AREAS = new Set([
+    'New England Region',
+    'Northern NSW',
+    'North West NSW',
+]);
+
 const JSON_LD = {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': 'GeneralContractor',
     name: BUSINESS_DATA.name,
     description: BUSINESS_DATA.description,
     url: BUSINESS_DATA.url,
@@ -32,10 +38,10 @@ const JSON_LD = {
                 longitude: BUSINESS_DATA.longitude,
             },
         }),
-    openingHours: BUSINESS_DATA.hours,
+    openingHours: ['Mo-Su 00:00-24:00'],
     ...(BUSINESS_DATA.areas.length > 0 && {
         areaServed: BUSINESS_DATA.areas.map((area) => ({
-            '@type': 'City',
+            '@type': REGION_AREAS.has(area) ? 'AdministrativeArea' : 'City',
             name: area,
         })),
     }),
@@ -57,31 +63,35 @@ const JSON_LD = {
 };
 
 export const meta: MetaFunction = () => [
-    {
-        title: `${BUSINESS_DATA.name} | ${BUSINESS_DATA.tagline}`,
-    },
+    { title: BUSINESS_DATA.seoTitle },
     { name: 'description', content: BUSINESS_DATA.description },
-    {
-        property: 'og:title',
-        content: `${BUSINESS_DATA.name} | ${BUSINESS_DATA.tagline}`,
-    },
+    { property: 'og:title', content: BUSINESS_DATA.seoTitle },
     { property: 'og:description', content: BUSINESS_DATA.description },
     { property: 'og:type', content: 'website' },
     { property: 'og:url', content: BUSINESS_DATA.url },
     { property: 'og:site_name', content: BUSINESS_DATA.name },
     { tagName: 'link', rel: 'canonical', href: BUSINESS_DATA.url },
-    { property: 'og:image', content: `${BUSINESS_DATA.url}/images/logo.png` },
-    { property: 'og:image:width', content: '1200' },
-    { property: 'og:image:height', content: '630' },
-    { property: 'og:image:alt', content: BUSINESS_DATA.name },
-    { name: 'twitter:card', content: 'summary_large_image' },
     {
-        name: 'twitter:title',
-        content: `${BUSINESS_DATA.name} | ${BUSINESS_DATA.tagline}`,
+        property: 'og:image',
+        content: `${BUSINESS_DATA.url}/images/hero-background.png`,
     },
+    {
+        property: 'og:image:alt',
+        content:
+            'J & H Rural Earthmoving operating earthworks in the New England region, NSW',
+    },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: BUSINESS_DATA.seoTitle },
     { name: 'twitter:description', content: BUSINESS_DATA.description },
-    { name: 'twitter:image', content: `${BUSINESS_DATA.url}/images/logo.png` },
-    { name: 'twitter:image:alt', content: BUSINESS_DATA.name },
+    {
+        name: 'twitter:image',
+        content: `${BUSINESS_DATA.url}/images/hero-background.png`,
+    },
+    {
+        name: 'twitter:image:alt',
+        content:
+            'J & H Rural Earthmoving operating earthworks in the New England region, NSW',
+    },
     { 'script:ld+json': JSON_LD },
 ];
 

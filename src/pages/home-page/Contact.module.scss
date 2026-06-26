@@ -16,8 +16,8 @@
     background: linear-gradient(
         to right,
         transparent,
-        rgba(2, 243, 2, 0.2) 30%,
-        rgba(2, 243, 2, 0.2) 70%,
+        rgba($primary, 0.2) 30%,
+        rgba($primary, 0.2) 70%,
         transparent
     );
 }
@@ -40,7 +40,7 @@
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: $primary;
+    color: $text-muted;
     margin-bottom: 1rem;
 }
 
@@ -51,7 +51,7 @@
     background: $primary;
     border-radius: $radius-full;
     flex-shrink: 0;
-    box-shadow: 0 0 8px rgba(2, 243, 2, 0.5);
+    box-shadow: 0 0 8px rgba($primary, 0.5);
 }
 
 .heading {
@@ -96,7 +96,7 @@
     &:hover {
         background: $primary-hover;
         transform: translateY(-2px);
-        box-shadow: 0 0 32px rgba(2, 243, 2, 0.3);
+        box-shadow: 0 0 32px rgba($primary, 0.3);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -197,19 +197,19 @@
     width: 40px;
     height: 40px;
     border-radius: $radius;
-    background: rgba(2, 243, 2, 0.08);
+    background: rgba($primary, 0.08);
     color: $primary;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    border: 1px solid rgba(2, 243, 2, 0.15);
+    border: 1px solid rgba($primary, 0.15);
 }
 
 .itemLabel {
     font-family: $font-body;
     font-size: 0.72rem;
-    color: $text-light;
+    color: $text-muted;
     text-transform: uppercase;
     letter-spacing: 0.07em;
     font-weight: 700;
@@ -225,7 +225,7 @@
     transition: color 0.2s;
 
     &:hover {
-        color: $primary;
+        color: $primary-on-light;
     }
 }
 
