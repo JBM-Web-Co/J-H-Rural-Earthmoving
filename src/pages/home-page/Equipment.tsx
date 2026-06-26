@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+﻿import { useEffect, useRef, useState } from 'react';
 import { animate, stagger } from 'animejs';
 import { BUSINESS_DATA } from '../../data';
 import { useScrollReveal } from '../../scrollReveal';
@@ -109,13 +109,18 @@ export default function Equipment() {
         if (!grid_visible || animated.current) return;
         animated.current = true;
 
+        if (!gridRef.current) return;
+        const cards = gridRef.current.querySelectorAll('[data-eq-card]');
+
         const prefersReduced = window.matchMedia(
             '(prefers-reduced-motion: reduce)'
         ).matches;
-        if (prefersReduced) return;
-        if (!gridRef.current) return;
-
-        const cards = gridRef.current.querySelectorAll('[data-eq-card]');
+        if (prefersReduced) {
+            cards.forEach((el) => {
+                if (el instanceof HTMLElement) el.style.opacity = '1';
+            });
+            return;
+        }
         animate(cards, {
             opacity: [0, 1],
             translateY: [40, 0],

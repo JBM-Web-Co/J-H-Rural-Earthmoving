@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+﻿import { useEffect, useRef } from 'react';
 import { animate, stagger } from 'animejs';
 import { CheckCircle2 } from 'lucide-react';
 import { BUSINESS_DATA } from '../../data';
@@ -35,13 +35,18 @@ export default function AboutUs() {
         if (!points_visible || animated_points.current) return;
         animated_points.current = true;
 
+        if (!pointsRef.current) return;
+        const items = pointsRef.current.querySelectorAll('[data-point]');
+
         const prefersReduced = window.matchMedia(
             '(prefers-reduced-motion: reduce)'
         ).matches;
-        if (prefersReduced) return;
-
-        if (!pointsRef.current) return;
-        const items = pointsRef.current.querySelectorAll('[data-point]');
+        if (prefersReduced) {
+            items.forEach((el) => {
+                if (el instanceof HTMLElement) el.style.opacity = '1';
+            });
+            return;
+        }
 
         animate(items, {
             opacity: [0, 1],
@@ -55,7 +60,7 @@ export default function AboutUs() {
     return (
         <section id="about" className={s.about}>
             <div className={s.inner}>
-                {/* ── Image Column ── */}
+                {/* -- Image Column -- */}
                 <div
                     ref={imageRef}
                     className={`${s.imageCol} ${image_visible ? s.imageVisible : ''}`}
@@ -76,7 +81,7 @@ export default function AboutUs() {
                     </div>
                 </div>
 
-                {/* ── Text Column ── */}
+                {/* -- Text Column -- */}
                 <div className={s.textCol}>
                     <div ref={contentRef} className={s.intro}>
                         <p className={s.sectionLabel}>
@@ -98,11 +103,12 @@ export default function AboutUs() {
                             need from an earthmoving contractor.
                         </p>
                         <p className={s.body}>
-                            That first-hand knowledge sets us apart. We don't
-                            just move dirt. We understand drainage, soil types,
-                            water flow, and farm productivity. We know that
-                            getting the job done right the first time keeps your
-                            operation moving forward without costly rework.
+                            That first-hand knowledge sets us apart. We
+                            don&apos;t just move dirt. We understand drainage,
+                            soil types, water flow, and farm productivity. We
+                            know that getting the job done right the first time
+                            keeps your operation moving forward without costly
+                            rework.
                         </p>
                     </div>
 
