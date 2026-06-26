@@ -20,7 +20,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    align-items: flex-start;
+    align-items: center;
 
     @include bp.above(tablet) {
         flex-direction: row;
@@ -93,9 +93,11 @@
     grid-template-columns: 1fr;
     gap: 2.5rem;
     margin-bottom: 2.5rem;
+    text-align: center;
 
     @include bp.above(tablet) {
         grid-template-columns: 2fr 1fr 1fr 1fr;
+        text-align: left;
     }
 }
 
@@ -104,6 +106,11 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    align-items: center;
+
+    @include bp.above(tablet) {
+        align-items: flex-start;
+    }
 }
 
 .logoLink {
@@ -158,6 +165,11 @@
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
+    align-items: center;
+
+    @include bp.above(tablet) {
+        align-items: flex-start;
+    }
 }
 
 .link {
@@ -176,6 +188,11 @@
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
+    align-items: center;
+
+    @include bp.above(tablet) {
+        align-items: flex-start;
+    }
 }
 
 .contactItem {
@@ -206,6 +223,11 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    align-items: center;
+
+    @include bp.above(tablet) {
+        align-items: flex-start;
+    }
 }
 
 .areaItem {
@@ -229,12 +251,18 @@
     padding-top: 1.5rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 0.5rem;
     font-family: $font-body;
     font-size: 0.78rem;
     color: var(--footer-muted);
+    text-align: center;
+
+    @include bp.above(tablet) {
+        justify-content: space-between;
+        text-align: left;
+    }
 }
 
 .attribution {
@@ -250,5 +278,35 @@
 
     &:hover {
         opacity: 1;
+    }
+}
+
+// ── Social Links ────────────────────────────────────────────────────────────
+
+.socials {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.socialLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: $radius;
+    border: 1px solid rgba(2, 243, 2, 0.4);
+    color: $primary;
+    transition:
+        color 0.2s,
+        border-color 0.2s,
+        background 0.2s,
+        box-shadow 0.2s;
+
+    &:hover {
+        border-color: $primary;
+        background: rgba(2, 243, 2, 0.08);
+        box-shadow: 0 0 12px rgba(2, 243, 2, 0.25);
     }
 }
