@@ -72,7 +72,7 @@ export const BUSINESS_DATA: BusinessData = {
     country: 'AU',
 
     url: 'https://j-hruralearthmoving.com',
-    facebook: undefined,
+    facebook: 'https://www.facebook.com/profile.php?id=61589910532824',
     googleProfile: undefined,
 
     latitude: -30.025,
