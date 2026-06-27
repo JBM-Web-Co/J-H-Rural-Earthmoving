@@ -66,43 +66,6 @@
     display: block;
 }
 
-.placeholderGrid {
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(
-        circle,
-        rgba(2, 243, 2, 0.1) 1px,
-        transparent 1px
-    );
-    background-size: 24px 24px;
-}
-
-.placeholderLabel {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-    text-align: center;
-
-    span {
-        font-family: $font-heading;
-        font-size: 1rem;
-        font-weight: 600;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: rgba(0, 0, 0, 0.15);
-    }
-
-    small {
-        font-family: $font-body;
-        font-size: 0.68rem;
-        color: rgba(0, 0, 0, 0.1);
-        letter-spacing: 0.04em;
-    }
-}
-
 .imageAccentTL,
 .imageAccentBR {
     position: absolute;
@@ -137,7 +100,7 @@
     align-items: center;
     gap: 0.2rem;
     border-radius: $radius;
-    box-shadow: 0 8px 24px rgba(2, 243, 2, 0.25);
+    box-shadow: 0 8px 24px rgba($primary, 0.25);
 
     @include bp.above(tablet) {
         right: -1.5rem;
@@ -188,7 +151,7 @@
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: $primary;
+    color: $text-muted;
 }
 
 .labelDot {
@@ -198,7 +161,7 @@
     background: $primary;
     border-radius: $radius-full;
     flex-shrink: 0;
-    box-shadow: 0 0 8px rgba(2, 243, 2, 0.5);
+    box-shadow: 0 0 8px rgba($primary, 0.5);
 }
 
 .heading {
@@ -212,7 +175,7 @@
 }
 
 .headingAccent {
-    color: $primary;
+    color: $primary-on-light;
 }
 
 .body {
@@ -242,7 +205,7 @@
 }
 
 .pointIcon {
-    color: $primary;
+    color: $primary-on-light;
     flex-shrink: 0;
     margin-top: 0.15rem;
 }

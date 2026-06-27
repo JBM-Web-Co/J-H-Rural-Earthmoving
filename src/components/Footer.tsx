@@ -32,11 +32,7 @@ export function Footer() {
                 <div className={s.grid}>
                     {/* Brand */}
                     <div className={s.brand}>
-                        <a
-                            href="#"
-                            aria-label={`${BUSINESS_DATA.name}`}
-                            className={s.logoLink}
-                        >
+                        <a href="/" className={s.logoLink}>
                             <img
                                 src="/images/logo.png"
                                 alt={BUSINESS_DATA.name}
@@ -119,7 +115,7 @@ export function Footer() {
                     <div>
                         <div className={s.colTitle}>Service Areas</div>
                         <div className={s.areaList}>
-                            {BUSINESS_DATA.areas.slice(0, 6).map((area) => (
+                            {BUSINESS_DATA.areas.map((area) => (
                                 <span key={area} className={s.areaItem}>
                                     {area}
                                 </span>

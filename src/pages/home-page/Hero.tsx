@@ -4,7 +4,7 @@ import Ticker from '../../components/Ticker';
 
 export default function Hero() {
     return (
-        <section className={s.hero} aria-label="Hero">
+        <section className={s.hero} aria-labelledby="hero-heading">
             <div className={s.bg} aria-hidden="true" />
             <div className={s.overlay} aria-hidden="true" />
             <div className={s.accentLine} aria-hidden="true" />
@@ -12,10 +12,10 @@ export default function Hero() {
             <div className={s.content}>
                 <p className={s.locationStamp}>
                     <span className={s.locationDot} aria-hidden="true" />
-                    Ben Lomond, NSW
+                    {BUSINESS_DATA.city}, {BUSINESS_DATA.state}
                 </p>
 
-                <h1 className={s.title}>
+                <h1 id="hero-heading" className={s.title}>
                     <span className={s.titleLine1}>J &amp; H</span>
                     <span className={s.titleLine2}>Rural</span>
                     <span className={s.titleLine3}>Earthmoving</span>

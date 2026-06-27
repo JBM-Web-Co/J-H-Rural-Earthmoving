@@ -1,8 +1,8 @@
 import { BUSINESS_DATA } from '../../data';
 import s from './Sponsoring.module.scss';
 
-const logoSponsors = BUSINESS_DATA.sponsors.filter((sp) => sp.logo);
-const textSponsors = BUSINESS_DATA.sponsors.filter((sp) => !sp.logo);
+const logo_sponsors = BUSINESS_DATA.sponsors.filter((sp) => sp.logo);
+const text_sponsors = BUSINESS_DATA.sponsors.filter((sp) => !sp.logo);
 
 export default function Sponsoring() {
     return (
@@ -14,7 +14,7 @@ export default function Sponsoring() {
                 </div>
 
                 <div className={s.logoGrid}>
-                    {logoSponsors.map((sp) => (
+                    {logo_sponsors.map((sp) => (
                         <div
                             key={sp.name}
                             className={s.logoCard}
@@ -30,9 +30,9 @@ export default function Sponsoring() {
                     ))}
                 </div>
 
-                {textSponsors.length > 0 && (
+                {text_sponsors.length > 0 && (
                     <ul className={s.textList} aria-label="Additional sponsors">
-                        {textSponsors.map((sp) => (
+                        {text_sponsors.map((sp) => (
                             <li key={sp.name} className={s.textItem}>
                                 {sp.name}
                             </li>

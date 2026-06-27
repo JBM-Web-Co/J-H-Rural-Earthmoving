@@ -1,26 +1,45 @@
-﻿import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { animate, stagger } from 'animejs';
 import { BUSINESS_DATA } from '../../data';
-import { useScrollReveal } from '../../scrollReveal';
+import { useScrollReveal } from '../../scroll-reveal';
 import s from './Equipment.module.scss';
 
-type MediaCarouselProps = {
+type MediaCarouselProps = Readonly<{
     media: readonly string[];
     name: string;
-};
+}>;
 
 function MediaCarousel({ media, name }: MediaCarouselProps) {
-    const [index, setIndex] = useState(0);
+    const [index, set_index] = useState(0);
+    const [touch_start, set_touch_start] = useState<number | null>(null);
 
-    const prev = () => setIndex((i) => (i - 1 + media.length) % media.length);
-    const next = () => setIndex((i) => (i + 1) % media.length);
+    const prev = () => set_index((i) => (i - 1 + media.length) % media.length);
+    const next = () => set_index((i) => (i + 1) % media.length);
+
+    const handle_touch_start = (e: React.TouchEvent) => {
+        set_touch_start(e.touches[0].clientX);
+    };
+
+    const handle_touch_end = (e: React.TouchEvent) => {
+        if (touch_start === null) return;
+        const diff = touch_start - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) next();
+            else prev();
+        }
+        set_touch_start(null);
+    };
 
     const current = media[index];
-    const isVideo = current.endsWith('.mp4');
+    const is_video = current.endsWith('.mp4');
 
     return (
-        <div className={s.carousel}>
-            {isVideo ? (
+        <div
+            className={s.carousel}
+            onTouchStart={handle_touch_start}
+            onTouchEnd={handle_touch_end}
+        >
+            {is_video ? (
                 <video
                     key={current}
                     className={s.carouselMedia}
@@ -34,7 +53,7 @@ function MediaCarousel({ media, name }: MediaCarouselProps) {
             ) : (
                 <img
                     src={current}
-                    alt={`${name} - photo ${index + 1}`}
+                    alt={`${name} — photo ${index + 1} of ${media.length}`}
                     className={s.carouselMedia}
                     loading="lazy"
                 />
@@ -87,7 +106,7 @@ function MediaCarousel({ media, name }: MediaCarouselProps) {
                             <button
                                 key={i}
                                 className={`${s.dot} ${i === index ? s.dotActive : ''}`}
-                                onClick={() => setIndex(i)}
+                                onClick={() => set_index(i)}
                                 type="button"
                                 tabIndex={-1}
                                 aria-hidden="true"

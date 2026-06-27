@@ -1,8 +1,8 @@
-﻿import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { animate, stagger } from 'animejs';
 import { CheckCircle2 } from 'lucide-react';
 import { BUSINESS_DATA } from '../../data';
-import { useScrollReveal } from '../../scrollReveal';
+import { useScrollReveal } from '../../scroll-reveal';
 import s from './AboutUs.module.scss';
 
 export default function AboutUs() {
@@ -70,13 +70,18 @@ export default function AboutUs() {
                             src="/images/about-us.jpg"
                             alt="J & H Rural Earthmoving team on site"
                             className={s.imagePhoto}
+                            width={945}
+                            height={1211}
+                            loading="lazy"
                         />
                     </div>
                     <div className={s.imageAccentTL} aria-hidden="true" />
                     <div className={s.imageAccentBR} aria-hidden="true" />
 
                     <div className={s.yearsCard}>
-                        <span className={s.yearsNum}>20+</span>
+                        <span className={s.yearsNum}>
+                            {BUSINESS_DATA.yearsOnLand}
+                        </span>
                         <span className={s.yearsLabel}>Years on the Land</span>
                     </div>
                 </div>
@@ -95,21 +100,11 @@ export default function AboutUs() {
                                 Built on the Land
                             </span>
                         </h2>
-                        <p className={s.body}>
-                            J &amp; H Rural Earthmoving was built from the
-                            ground up. With years of experience working on our
-                            own family farm, we developed a deep understanding
-                            of what rural and agricultural landowners actually
-                            need from an earthmoving contractor.
-                        </p>
-                        <p className={s.body}>
-                            That first-hand knowledge sets us apart. We
-                            don&apos;t just move dirt. We understand drainage,
-                            soil types, water flow, and farm productivity. We
-                            know that getting the job done right the first time
-                            keeps your operation moving forward without costly
-                            rework.
-                        </p>
+                        {BUSINESS_DATA.aboutBody.map((para, i) => (
+                            <p key={i} className={s.body}>
+                                {para}
+                            </p>
+                        ))}
                     </div>
 
                     <div ref={pointsRef} className={s.points}>

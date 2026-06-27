@@ -1,5 +1,5 @@
-type HeroStat = Readonly<{
-    num: string;
+type ProjectPhoto = Readonly<{
+    src: string;
     label: string;
 }>;
 
@@ -11,7 +11,6 @@ type NavItem = Readonly<{
 type Service = Readonly<{
     title: string;
     description: string;
-    iconName: string;
 }>;
 
 type EquipmentCategory = Readonly<{
@@ -29,6 +28,7 @@ type Sponsor = Readonly<{
 
 export type BusinessData = Readonly<{
     name: string;
+    seoTitle: string;
     tagline: string;
     description: string;
     phone: string;
@@ -42,20 +42,22 @@ export type BusinessData = Readonly<{
     abn: string;
     url: string;
     facebook?: string;
-    googleProfile?: string;
     latitude?: number;
     longitude?: number;
-    heroStats: readonly HeroStat[];
+    yearsOnLand: string;
+    aboutBody: readonly string[];
     whyUsPoints: readonly string[];
     navItems: readonly NavItem[];
     services: readonly Service[];
     areas: readonly string[];
     equipment: readonly EquipmentCategory[];
+    projectPhotos: readonly ProjectPhoto[];
     sponsors: readonly Sponsor[];
 }>;
 
 export const BUSINESS_DATA: BusinessData = {
     name: 'J & H Rural Earthmoving',
+    seoTitle: 'J & H Rural Earthmoving | Rural Earthmoving, New England NSW',
     tagline: 'Rural and civil earthmoving. New England, NSW.',
     description:
         'Family-owned rural and civil earthworks specialists servicing Northern NSW and the New England region. From broad-acre farm earthworks to civil construction, we deliver results that keep your land productive.',
@@ -73,16 +75,15 @@ export const BUSINESS_DATA: BusinessData = {
 
     url: 'https://j-hruralearthmoving.com',
     facebook: 'https://www.facebook.com/profile.php?id=61589910532824',
-    googleProfile: undefined,
 
     latitude: -30.025,
     longitude: 151.64,
 
-    heroStats: [
-        { num: '24/7', label: 'Emergency Response' },
-        { num: '10+', label: 'Years Experience' },
-        { num: '100+', label: 'Jobs Completed' },
-        { num: 'NSW', label: 'New England Region' },
+    yearsOnLand: '20+',
+
+    aboutBody: [
+        'J & H Rural Earthmoving was built from the ground up. With years of experience working on our own family farm, we developed a deep understanding of what rural and agricultural landowners actually need from an earthmoving contractor.',
+        "That first-hand knowledge sets us apart. We don't just move dirt. We understand drainage, soil types, water flow, and farm productivity. We know that getting the job done right the first time keeps your operation moving forward without costly rework.",
     ],
 
     whyUsPoints: [
@@ -106,37 +107,31 @@ export const BUSINESS_DATA: BusinessData = {
             title: 'Rural Earthworks',
             description:
                 'Broad-acre earthmoving for farm improvements. Land levelling, contour banks, drainage, and pasture development across all terrain types.',
-            iconName: 'layers',
         },
         {
             title: 'Civil Construction',
             description:
                 'Precision civil earthworks for subdivisions, commercial sites, and infrastructure projects. On budget, on time, and built to spec.',
-            iconName: 'settings',
         },
         {
             title: 'Dam Construction & Repair',
             description:
                 'New dam construction and existing dam repairs using compaction techniques that hold water and stand the test of time and weather.',
-            iconName: 'shield',
         },
         {
             title: 'Land Clearing',
             description:
                 'Efficient clearing of trees, scrub, and stumps for farming, development, and pasture establishment. Your land, ready to work.',
-            iconName: 'wrench',
         },
         {
             title: 'Road Construction',
             description:
                 'Farm road construction, grading, and maintenance. All-weather access roads built to handle heavy vehicles and demanding local conditions.',
-            iconName: 'globe',
         },
         {
             title: 'Emergency Response',
             description:
                 'Rapid 24/7 emergency earthmoving for flood damage, erosion events, and urgent infrastructure repair. We mobilise fast when it counts.',
-            iconName: 'zap',
         },
     ],
 
@@ -271,6 +266,23 @@ export const BUSINESS_DATA: BusinessData = {
             ],
         },
     ],
+
+    projectPhotos: [
+        { src: '/images/excavator/excav1.jpg', label: 'Excavation' },
+        { src: '/images/dozer/dozer1.jpg', label: 'Dozer Work' },
+        { src: '/images/road-works/road1.jpg', label: 'Road Build' },
+        { src: '/images/moxy/moxy1.jpg', label: 'Dam Works' },
+        { src: '/images/trucks/truck1.jpg', label: 'Transport' },
+        { src: '/images/excavator/excav3.jpg', label: 'Site Prep' },
+        { src: '/images/dozer/dozer3.jpg', label: 'Land Clearing' },
+        { src: '/images/road-works/road3.jpg', label: 'Road Sealing' },
+        { src: '/images/moxy/moxy3.jpg', label: 'Earthworks' },
+        { src: '/images/trucks/truck3.jpg', label: 'Haulage' },
+        { src: '/images/excavator/excav5.jpg', label: 'Bulk Dig' },
+        { src: '/images/dozer/dozer5.jpg', label: 'Site Clearing' },
+        { src: '/images/moxy/moxy5.jpg', label: 'Cut & Fill' },
+    ],
+
     sponsors: [
         {
             name: 'Guyra Junior Rugby League',

@@ -54,8 +54,8 @@ export default function Contact() {
     };
 
     const handle_submit = async (e: React.FormEvent<HTMLFormElement>) => {
-        track('Form Submitted', { source: 'homepage' });
         e.preventDefault();
+        track('Form Submitted', { source: 'homepage' });
         const errs = validateForm(form);
         if (Object.keys(errs).length > 0) {
             set_errors(errs);

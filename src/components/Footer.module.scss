@@ -9,9 +9,9 @@
 // ── Emergency Strip ────────────────────────────────────────────────────────────
 
 .emergencyStrip {
-    background: rgba(2, 243, 2, 0.06);
-    border-top: 1px solid rgba(2, 243, 2, 0.15);
-    border-bottom: 1px solid rgba(2, 243, 2, 0.1);
+    background: rgba($primary, 0.06);
+    border-top: 1px solid rgba($primary, 0.15);
+    border-bottom: 1px solid rgba($primary, 0.1);
     padding: 0.875rem 0;
 }
 
@@ -56,6 +56,12 @@
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .zapIcon {
+        animation: none;
+    }
+}
+
 .stripCta {
     display: inline-flex;
     align-items: center;
@@ -76,7 +82,7 @@
 
     &:hover {
         background: $primary-hover;
-        box-shadow: 0 0 16px rgba(2, 243, 2, 0.3);
+        box-shadow: 0 0 16px rgba($primary, 0.3);
     }
 }
 
@@ -296,7 +302,7 @@
     width: 36px;
     height: 36px;
     border-radius: $radius;
-    border: 1px solid rgba(2, 243, 2, 0.4);
+    border: 1px solid rgba($primary, 0.4);
     color: $primary;
     transition:
         color 0.2s,
@@ -306,7 +312,7 @@
 
     &:hover {
         border-color: $primary;
-        background: rgba(2, 243, 2, 0.08);
-        box-shadow: 0 0 12px rgba(2, 243, 2, 0.25);
+        background: rgba($primary, 0.08);
+        box-shadow: 0 0 12px rgba($primary, 0.25);
     }
 }
