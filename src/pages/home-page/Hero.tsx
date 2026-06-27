@@ -34,15 +34,6 @@ export default function Hero() {
                         Get a Quote
                     </a>
                 </div>
-
-                <div className={s.statsStrip} aria-label="At a glance">
-                    {BUSINESS_DATA.heroStats.map((stat) => (
-                        <div key={stat.label} className={s.statItem}>
-                            <span className={s.statNum}>{stat.num}</span>
-                            <span className={s.statLabel}>{stat.label}</span>
-                        </div>
-                    ))}
-                </div>
             </div>
 
             <div className={s.scrollCue} aria-hidden="true">
