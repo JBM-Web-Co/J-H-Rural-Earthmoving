@@ -1,18 +1,5 @@
-export type ServiceIconName =
-    | 'layers'
-    | 'settings'
-    | 'shield'
-    | 'wrench'
-    | 'globe'
-    | 'zap';
-
 type ProjectPhoto = Readonly<{
     src: string;
-    label: string;
-}>;
-
-type HeroStat = Readonly<{
-    num: string;
     label: string;
 }>;
 
@@ -24,7 +11,6 @@ type NavItem = Readonly<{
 type Service = Readonly<{
     title: string;
     description: string;
-    iconName: ServiceIconName;
 }>;
 
 type EquipmentCategory = Readonly<{
@@ -58,7 +44,6 @@ export type BusinessData = Readonly<{
     facebook?: string;
     latitude?: number;
     longitude?: number;
-    heroStats: readonly HeroStat[];
     yearsOnLand: string;
     aboutBody: readonly string[];
     whyUsPoints: readonly string[];
@@ -94,13 +79,6 @@ export const BUSINESS_DATA: BusinessData = {
     latitude: -30.025,
     longitude: 151.64,
 
-    heroStats: [
-        { num: '24/7', label: 'Emergency Response' },
-        { num: '10+', label: 'Years Experience' },
-        { num: '100+', label: 'Jobs Completed' },
-        { num: 'NSW', label: 'New England Region' },
-    ],
-
     yearsOnLand: '20+',
 
     aboutBody: [
@@ -129,37 +107,31 @@ export const BUSINESS_DATA: BusinessData = {
             title: 'Rural Earthworks',
             description:
                 'Broad-acre earthmoving for farm improvements. Land levelling, contour banks, drainage, and pasture development across all terrain types.',
-            iconName: 'layers',
         },
         {
             title: 'Civil Construction',
             description:
                 'Precision civil earthworks for subdivisions, commercial sites, and infrastructure projects. On budget, on time, and built to spec.',
-            iconName: 'settings',
         },
         {
             title: 'Dam Construction & Repair',
             description:
                 'New dam construction and existing dam repairs using compaction techniques that hold water and stand the test of time and weather.',
-            iconName: 'shield',
         },
         {
             title: 'Land Clearing',
             description:
                 'Efficient clearing of trees, scrub, and stumps for farming, development, and pasture establishment. Your land, ready to work.',
-            iconName: 'wrench',
         },
         {
             title: 'Road Construction',
             description:
                 'Farm road construction, grading, and maintenance. All-weather access roads built to handle heavy vehicles and demanding local conditions.',
-            iconName: 'globe',
         },
         {
             title: 'Emergency Response',
             description:
                 'Rapid 24/7 emergency earthmoving for flood damage, erosion events, and urgent infrastructure repair. We mobilise fast when it counts.',
-            iconName: 'zap',
         },
     ],
 

@@ -17,7 +17,11 @@ export function Layout({ children }: LayoutProps) {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <link rel="icon" href="/images/logo.png" type="image/png" />
+                <link
+                    rel="icon"
+                    href="/images/favicon.svg"
+                    type="image/svg+xml"
+                />
                 <link rel="apple-touch-icon" href="/images/logo.png" />
                 <meta name="theme-color" content="#1a1a1a" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />

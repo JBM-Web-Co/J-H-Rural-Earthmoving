@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { animate, stagger } from 'animejs';
 import { BUSINESS_DATA } from '../../data';
-import { useScrollReveal } from '../../scrollReveal';
+import { useScrollReveal } from '../../scroll-reveal';
 import s from './Equipment.module.scss';
 
 type MediaCarouselProps = Readonly<{

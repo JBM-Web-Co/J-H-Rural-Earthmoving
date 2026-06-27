@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { animate, stagger } from 'animejs';
 import { CheckCircle2 } from 'lucide-react';
 import { BUSINESS_DATA } from '../../data';
-import { useScrollReveal } from '../../scrollReveal';
+import { useScrollReveal } from '../../scroll-reveal';
 import s from './AboutUs.module.scss';
 
 export default function AboutUs() {
@@ -70,6 +70,9 @@ export default function AboutUs() {
                             src="/images/about-us.jpg"
                             alt="J & H Rural Earthmoving team on site"
                             className={s.imagePhoto}
+                            width={945}
+                            height={1211}
+                            loading="lazy"
                         />
                     </div>
                     <div className={s.imageAccentTL} aria-hidden="true" />

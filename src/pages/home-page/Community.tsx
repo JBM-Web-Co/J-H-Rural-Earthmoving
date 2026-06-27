@@ -1,4 +1,4 @@
-import { useScrollReveal } from '../../scrollReveal';
+import { useScrollReveal } from '../../scroll-reveal';
 import { BUSINESS_DATA } from '../../data';
 import s from './Community.module.scss';
 import Sponsoring from './Sponsoring';

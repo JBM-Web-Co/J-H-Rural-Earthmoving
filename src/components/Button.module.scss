@@ -34,7 +34,7 @@
 
         &:hover {
             background: $primary-hover;
-            box-shadow: 0 0 24px rgba(2, 243, 2, 0.3);
+            box-shadow: 0 0 24px rgba($primary, 0.3);
         }
 
         &:disabled {
@@ -50,8 +50,8 @@
         border: 1.5px solid $primary;
 
         &:hover {
-            background: rgba(2, 243, 2, 0.06);
-            box-shadow: 0 0 16px rgba(2, 243, 2, 0.15);
+            background: rgba($primary, 0.06);
+            box-shadow: 0 0 16px rgba($primary, 0.15);
         }
     }
 
